@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- <title>Job Hunters</title> -->
+
+  <!--Bootstrap links -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <!-- Add navbar stylesheet -->
+  <link rel="stylesheet" href="../static/layout.css">
+  {% block cust_stylesheet %}
+  {% endblock %}
+
+  {% if title %}
+  <title>Job Hunters-{{title}}</title>
+  {% else %}
+  <title>Job Hunters</title>
+  {% endif %}
+</head>
+
+<body>
+  <!--optional header for the home page-->
+  {% block optional_main_nav %}
+  {% endblock %}
+
+  <!--second navbar-->
+  <nav class="navbar navbar-expand-lg second-nav sticky-top">
+    <a class="navbar-brand" href="#">Job Hunters</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon text-light"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">Home<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Jobs by location
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
+            <a class="dropdown-item" href="#">Mumbai</a>
+            <a class="dropdown-item" href="#">Delhi</a>
+            <!--add dynamically-->
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">See all location</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Jobs by Category
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+            <a class="dropdown-item" href="#">item1</a>
+            <a class="dropdown-item" href="#">item2</a>
+            <!--add dynamically-->
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">See all categories</a>
+          </div>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2 nav-ip" type="search" placeholder="Search all jobs" aria-label="Search">
+        <button class="btn my-2 my-sm-0 nav-btn-2" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+  <div class="header1 sticky-top">
+    <div class="progress-container">
+      <div class="progress-bar" id="myBar"></div>
+    </div>
+  </div>
+
+  {% block content %}
+  {% endblock %}
+
+  <!--Footer-->
+  <footer class="container-fluid">
+    <div class="row justify-content-center pt-5 pb-3">
+      <div class="col-md-4 text-center">
+        <p class="display-3">Job Hunters Logo</p>
+      </div>
+      <div class="col-md">
+        <div class="row justify-content-center">
+          <div class="col-md">
+            <ul>
+              <li>Home</li>
+              <li>Home</li>
+              <li>Home</li>
+            </ul>
+          </div>
+          <div class="col-md">
+            <ul>
+              <li>Home</li>
+              <li>Home</li>
+              <li>Home</li>
+            </ul>
+          </div>
+        </div>
+        <div class="row mt-3 p-2">
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias quasi repellendus, adipisci quod cum quae
+            quis enim? Deserunt beatae modi iusto non tenetur, illo quisquam omnis rem, laborum quo explicabo.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <div class="text-center text-light p-2" style="background-color: rgba(35,136,190,1);">© 2018 Copyright:
+    <a href="#" class="text-light"> MDBootstrap.com</a>
+  </div>
+
+  <!--bootstrap scripts-->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+  <!--layout script-->
+  <script src="../static/layout.js"></script>
+
+  {% block cust_scripts %}
+  {% endblock %}
+</body>
+
+</html>

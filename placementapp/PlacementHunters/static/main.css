@@ -1,0 +1,139 @@
+body{
+    margin:0;
+    font-family: 'Open Sans', sans-serif;
+}
+.main-nav{
+    z-index:10;
+}
+.intro-page{
+<<<<<<< HEAD:placementapp/PlacementHunters/static/main.css
+    background-image:url('../static/images/main1.jpg');
+    background-color:linear-gradient(166deg, rgba(35,136,190,1) , rgba(42, 110, 85,1));
+    /* background-color: blue; */
+    background-blend-mode: multiply;
+=======
+    background-image:url('/static/pictures/main-img.jpg');
+    background-color: grey;
+>>>>>>> 316c25ce4db15eaadd46496e8786d038bcae70b7:placementapp/static/main.css
+    background-size: cover;
+    height:80%;
+    width:100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.register-as{
+    background-color:rgba(0,0,0,0.5);
+    text-decoration: none;
+    color:rgb(230, 230, 230);
+    transition:1s;
+}
+.register-as:hover{
+    background-color:rgba(0,0,0,0.6);
+    color:rgb(255, 255, 255);
+    text-decoration: none;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition:0.5s;
+}
+.learn-more, .nav-btn, .purchase-btn{
+    border: 0.1rem solid rgba(35,136,190,1);
+}
+
+.main-nav{
+    color:white;
+}
+.learn-more:hover, .nav-btn:hover, .purchase-btn:hover{
+    transition : 0.5s;
+    background-color: rgba(35,136,190,0.7);
+    color:white;
+}
+.nav-ip:focus{
+    border-color: rgba(35,136,190,0.7);
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(35,136,190,1);
+    -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(35,136,190,1);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(35,136,190,1);
+}
+
+.second-nav a{
+    text-decoration: none;
+    /* color:rgb(30,30,30); */
+    color:rgb(230, 230, 230);
+}
+.second-nav a:hover{
+    text-decoration: none;
+    /* color:rgb(30,30,30); */
+    color:rgb(230, 230, 230);
+}
+.second-nav{
+    /*background-color: rgba(195,88,98,1);*/
+    background-image: linear-gradient(166deg, rgba(35,136,190,1) , rgba(42, 110, 85,1));
+    z-index:100;
+}
+.nav-btn-2:hover{
+    background-color: rgba(35,136,190,1);
+    border: 0.1rem solid rgba(35,136,190,1);
+    transition : 0.5s;
+    color:white;
+}
+.nav-btn-2{
+    color:white;
+    background-color:rgba(0,0,0,.25);
+}
+
+/*FATEMA CSS*/
+.inputelements{
+    /* border: 2px solid #00cc00; */
+    border-radius: 15px;
+}
+
+/*Color options:
+
+HTML code: 	#804754
+RGB code: 	R: 128 G: 71 B: 84
+HSV: 	346.32° 44.53% 50.2%
+
+HTML code: 	#EDB6B3
+RGB code: 	R: 237 G: 182 B: 179
+HSV: 	3.1° 24.47% 92.94%
+
+HTML code: 	#FF8577
+RGB code: 	R: 255 G: 133 B: 119
+HSV: 	6.18° 53.33% 100%
+
+HTML code: 	#FC96A9
+RGB code: 	R: 252 G: 150 B: 169
+HSV: 	348.82° 40.48% 98.82%
+
+HTML code: 	#EEC3C3
+RGB code: 	R: 238 G: 195 B: 195
+HSV: 	0° 18.07% 93.33%
+
+
+HTML code: 	#7B031A
+RGB code: 	R: 123 G: 3 B: 26
+HSV: 	348.5° 97.56% 48.2
+
+
+HTML code: 	#902639
+RGB code: 	R: 144 G: 38 B: 57
+HSV: 	349.25° 73.61% 56.47%
+
+HTML code: 	#C35862
+RGB code: 	R: 195 G: 88 B: 98
+HSV: 	354.39° 54.87% 76.47%*/
+/*Nice references:
+https://mobirise.com/extensions/industrym4/industry.html
+http://html.tonatheme.com/2018/Digency/
+https://colorlib.com/wp/simple-bootstrap-templates/
+https://bootstrapmade.com/
+https://mobirise.com/bootstrap-template/bootstrap-layout-templates/
+
+
+
+
+    font-family: 'Montserrat', sans-serif;
+
+    font-family: 'Open Sans', sans-serif;
+

@@ -1,0 +1,226 @@
+<html>
+<head>
+	<title>Some more information!</title>
+	<meta charset="utf-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+ 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container-fluid" style="background-color:#e6e6e6;">
+		<div class="row">
+			<div class="col-md-3">
+			</div>
+			<div class="col-md-6">
+				<div class="panel panel-default">
+				<div class="panel-heading">Your Resume Information</div>
+				<div class="panel-body">
+                <form method="POST" action="">
+                    {{ form.hidden_tag() }}
+                    <div class="form-group">
+                        {{ form.school_name.label(class="form-control-label") }}
+
+                        {% if form.school_name.errors %}
+                            {{ form.school_name(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.school_name.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.school_name(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.tenth_percent.label(class="form-control-label") }}
+
+                        {% if form.tenth_percent.errors %}
+                            {{ form.tenth_percent(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.tenth_percent.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.tenth_percent(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.junior_college_name.label(class="form-control-label") }}
+
+                        {% if form.junior_college_name.errors %}
+                            {{ form.junior_college_name(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.junior_college_name.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.junior_college_name(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.twelfth_percent.label(class="form-control-label") }}
+
+                        {% if form.twelfth_percent.errors %}
+                            {{ form.twelfth_percent(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.twelfth_percent.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.twelfth_percent(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.graduation_college_name.label(class="form-control-label") }}
+
+                        {% if form.graduation_college_name.errors %}
+                            {{ form.graduation_college_name(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.graduation_college_name.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.graduation_college_name(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.graduation_cgpa.label(class="form-control-label") }}
+
+                        {% if form.graduation_cgpa.errors %}
+                            {{ form.graduation_cgpa(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.graduation_cgpa.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.graduation_cgpa(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.graduation_course_name.label(class="form-control-label") }}
+
+                        {% if form.graduation_course_name.errors %}
+                            {{ form.graduation_course_name(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.graduation_course_name.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.graduation_course_name(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.graduation_year_of_passing.label(class="form-control-label") }}
+
+                        {% if form.graduation_year_of_passing.errors %}
+                            {{ form.graduation_year_of_passing(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.graduation_year_of_passing.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.graduation_year_of_passing(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.post_graduation_yes_no.label(class="form-control-label") }}
+
+                        {% if form.post_graduation_yes_no.errors %}
+                            {{ form.post_graduation_yes_no(class="is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.post_graduation_yes_no.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}    
+                            <ul id="post_graduation_yes_no">
+                                <li><input id="post_graduation_yes_no-0" name="post_graduation_yes_no" type="radio" value="Y" onclick="yesnoCheck(1)"> 
+                                <label for="post_graduation_yes_no-0">Yes</label></li>
+                                <li><input id="post_graduation_yes_no-1" name="post_graduation_yes_no" type="radio" value="N" onclick="yesnoCheck(0)">
+                                     <label for="post_graduation_yes_no-1">No</label></li></ul>
+                        {% endif %}
+                    </div>
+                    <!-- POST_GRAD INFO -->
+                    <div id="post_grad" style="display:none;">
+                        <label for='blabla'>Thanks</label>
+                        <input type="text" name="blabla" id = "blabla">
+                    </div>
+                    <div class="form-group">
+                        {{ form.about_yourself.label(class="form-control-label") }}
+
+                        {% if form.about_yourself.errors %}
+                            {{ form.about_yourself(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.about_yourself.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.about_yourself(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.hobbies.label(class="form-control-label") }}
+
+                        {% if form.hobbies.errors %}
+                            {{ form.hobbies(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.hobbies.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.hobbies(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                            <select class="selectpicker" multiple data-live-search="true">
+                                    <option>Mustard</option>
+                                    <option>Ketchup</option>
+                                    <option>Relish</option>
+                                  </select>
+                        <!-- {{ form.skills.label(class="form-control-label") }}
+
+                        {% if form.skills.errors %}
+                            {{ form.skills(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.skills.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.skills(class="form-control form-control-lg",size=1) }}
+                        {% endif %} -->
+                    </div>
+                    <div class="form-group">
+                        {{ form.submit(class="btn btn-info")}}
+                    </div>
+                </form>
+			</div>
+			<div class="col-md-3 bg-dark">
+			</div>
+		</div>
+	</div>
+<script type="text/javascript">
+    function yesnoCheck(x){
+        
+        if(x==1){
+             document.getElementById('post_grad').style.display = 'block';
+            // document.getElementById('no').checked = false;
+        }
+        else{
+            document.getElementById('post_grad').style.display = 'none';
+            // document.getElementById('yes').checked = false;
+        }
+    }
+</script>  
+</body>
+</html>

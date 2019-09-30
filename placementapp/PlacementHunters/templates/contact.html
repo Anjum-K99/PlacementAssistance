@@ -1,0 +1,59 @@
+{% extends 'layout.html' %}
+
+{% block cust_stylesheet %}
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="../static/contact.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+  integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+{% endblock %}
+
+{% block content %}
+  <h1 class="text-center display-4 jumbotron jumbo-image mask1">Contact Us</h1>
+  <hr style="width:80%">
+  <div class="container-fluid">
+    <div class="row p-2 pb-3">
+      <div class="col-md-4">
+        <div class="container-fluid padding">
+          <div id="map" class="mt-2"><iframe
+              src="https://www.google.com/maps/d/embed?mid=1YQCAVElqnFK5IDq_FigIwHQUjGM&source=s_q&hl=en&geocode&ie=UTF8&hq=Sk%20Somaiya%20College%20Of%20Arts%20%26%20Commerce&hnear=Sk%20Somaiya%20College%20Of%20Arts%20%26%20Commerce%2C%20Kurla%2C%20Mumbai%2C%20Mumbai%20suburban%2C%20Maharashtra%2C%20India&msa=0&ll=19.07511807000497%2C72.89999499999999&spn=0.009633%2C0.013711&output=embed&z=16"
+              allowfullscreen style="width:100%;height:60%"></iframe><!--open map as modal.-->
+          </div>
+          <p class="text-dark mt-4">
+            Address:
+            Princeton market,
+            behind Jackson store,
+            Mumbai,Maharashtra.
+          </p>
+        </div>
+      </div>
+      <div class="col-md ml-4">
+        <form class="form-horizontal" action="/action_page.php"><!--change form styling later. buttons and inputs-->
+
+          <div class="form-group">
+            <label for="email">Email address:</label>
+            <input type="email" class="form-control" id="email">
+          </div>
+
+          <div class="form-group">
+            <label for="">Comments</label>
+            <textarea type="" class="form-control" id="comments"></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-success btn-outline-light">Submit</button>
+
+        </form>
+      </div>
+    </div>
+    <div class="row jumbotron">
+      <h1 class="display-4 col-md-12 text-center">Connect</h1><br><hr style="width:80%">
+      <div class="social col-md-12 text-center">
+        <a href="#" class='display-4 px-3 text-dark'><i class="fab fa-facebook"></i></a><!--change colors later-->
+        <a href="#" class='display-4 px-3 text-dark'><i class="fab fa-instagram"></i></a>
+        <a href="#" class='display-4 px-3 text-dark'><i class="fab fa-youtube"></i></a>
+        <a href="#" class='display-4 px-3 text-dark'><i class="fab fa-twitter"></i></a>
+        <a href="#" class='display-4 px-3 text-dark'><i class="fab fa-google-plus-g"></i></a>
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}

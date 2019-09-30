@@ -1,0 +1,74 @@
+{% extends 'layout.html' %}
+   
+{% block cust_stylesheet %}
+  <!-- Stylesheet only for profile page -->
+  <link rel="stylesheet" href="../static/profile.css" type="text/css">
+{% endblock %}
+
+{% block content %}
+    <!-- my trial -->
+	  <div class="container-fluid main-body p-5">
+		  <div class="row justify-content-center">
+			  <div class="col-md-9 main-card p-5">
+          
+          <div class="tab row pb-4">
+            <button class="tablinks btn btn-profile col-md" onclick="openTab(event, 'job-seeker-profile')">Profile</button>
+            <button class="tablinks btn btn-profile col-md" onclick="openTab(event, 'job-seeker-resume')">Resume/Skillset</button>
+            <button class="tablinks btn btn-profile col-md" onclick="openTab(event, 'job-seeker-applied-jobs')">Your Jobs</button>
+          </div>
+          <div class="row">
+
+            <div class="profile-page tab-content" id="job-seeker-profile">
+              <p class="display-4">Hello, {{ username }}</p>
+              <p>Name:<span class="card">{{ "name goes here" }}</span></p>
+              <p>Age and DOB<span>{{ "age and DOB here" }}</span></p>
+              <p>Address: <span>{{ 'Address here' }}</span></p>
+              <p>Phone number: <span>{{ '998174545' }}</span></p>
+              <p>Aadhar number: <span>{{ '998174545' }}</span></p>
+              <p>Education details</p>
+              <!--add 12th, 10th, college and school and higher studies only name not marks.-->
+            </div>
+
+            <div class="resume-page tab-content" id="job-seeker-resume">
+                <!--Resume page-->
+                <p>10th schooling<span>{{ 'name of school' }}</span></p>
+                <p>Passing marks<span>{{ 'marks' }}</span></p>
+                <p>12th schooling<span>{{ 'name of school' }}</span></p>
+                <p>Passing marks<span>{{ 'marks' }}</span></p>
+                <p>College <span>{{ 'name of school' }}</span></p>
+                <!--only if checked.-->
+                <p>Degree Name <span>{{ 'Name of degree' }}</span></p>
+                <p>Passing CGPA<span>{{ 'marks' }}</span></p>
+                <p>Higher schooling<span>{{ 'name of school' }}</span></p>
+                <!--only if checked-->
+                <p>Passing marks<span>{{ 'marks' }}</span></p>
+                <!-- Add resume and skills details -->
+              </div>
+
+              <div class="jobspage tab-content" id="job-seeker-applied-jobs">
+                  <!-- Jobs page -->
+                  <div class='container'>
+                    <!--jobs applied-->
+                    <div class="row">
+                      <!--content dynamically generated-->
+                      <div class="card col-md p-3 m-3">
+                        <img class="card-img-top" src="..." alt="Card image 1">
+                        <div class="card-body">
+                          <p class="card-text">Quick sample text to create the card title and make up the body of the card's
+                            content.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+          </div>
+			  </div>
+	  	</div>
+	  </div>
+{% endblock content %}
+{% block cust_scripts %}
+  <script src="../static/profile.js"></script>
+{% endblock %}
+

@@ -1,0 +1,253 @@
+{% extends 'layout.html' %}
+
+{% block cust_stylesheet %}
+  <!--Personal CSS links-->
+  <link rel="stylesheet" href="../static/main.css" type="text/css"><!--replace with urlfor-->
+
+  <!--icons for main buttons-->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+    integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+  <link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans&display=swap" rel="stylesheet"> 
+{% endblock cust_stylesheet%}
+
+{% block optional_main_nav %}
+<!-- main content here -->
+<!--Main Navbar-->
+<header class="container-fluid">
+  <nav class="navbar navbar-expand-md navbar-light fixed-top main-nav">
+    <!--make this something else -->
+    <div class="container-fluid">
+      <a href="#"></a>
+      <!--for logo -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        {% if current_user.is_authenticated %}
+          <div class="ml-auto">
+            <a class="btn btn-sm nav-btn mr-2" name="Profile" href="{{ url_for('Profile') }}">Profile</a>
+            <a class="btn btn-sm nav-btn mr-2" name="Logout" href="{{ url_for('logout') }}">Logout</a>
+          </div>
+        {% else %}
+          <form class="form-inline navbar-nav ml-auto" method="POST" action="">
+            {{ form.hidden_tag() }}
+            <a class="btn btn-sm nav-btn mr-2" name="Contact us" href="{{ url_for('contact') }}">Contact Us</a>
+            <!-- <input type='text' name='uname' placeholder="Username" class="form-control form-control-sm nav-ip mr-2"> -->
+            {{ form.username(class="form-control form-control-sm nav-ip mr-2",placeholder="Username") }}
+            <!-- <input type='password' name='pwd' placeholder="Password" class="form-control form-control-sm nav-ip mr-3"> -->
+            {% if form.username.errors %}
+              {{ form.username(class="form-control form-control-lg is-invalid") }}
+              <div class="invalid-feedback">
+                {% for error in form.username.errors %}
+                  <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+            {% endif %}
+
+            {{ form.password(class="form-control form-control-sm nav-ip mr-2",placeholder='Password') }}
+            {% if form.password.errors %}
+              {{ form.password(class="form-control form-control-lg is-invalid") }}
+              <div class="invalid-feedback">
+                {% for error in form.password.errors %}
+                  <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+            {% endif %}
+            <!-- <button class="btn btn-light btn-sm nav-btn mr-2" name="login">Log In </button> -->
+            {{ form.login(class="btn btn-sm nav-btn mr-2") }}
+            <!-- <button class="btn btn-light btn-sm nav-btn" name="login">Register!</button> -->
+            {{ form.register(class="btn btn-sm nav-btn") }}
+          </form>
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+</header>
+
+
+<!--Main Jumbotron-->
+<div class="intro-page">
+  <div class="container-fluid">
+    <div class="row" style="height:6rem"></div>
+    <div class="row justify-content-center">
+      <p class="display-3 text-center" id="heading-title"></p><br>
+    </div>
+    <div class="row justify-content-center">
+      <button class="btn learn-more mr-2">Learn More</button>
+      <a class="btn learn-more" href="#pricing">Our Prices</a>
+    </div>
+    <hr style="width:50%">
+    <div class="row justify-content-center mt-4">
+      <a class="col-sm-2 register-as m-3 p-3 text-center" href="#">
+        <i class="fas fa-graduation-cap display-3"></i>
+        <p>Register as Job Seeker</p>
+      </a>
+      <a class="col-sm-2 register-as m-3 p-3 text-center" href="#">
+        <i class="fas fa-briefcase display-3"></i>
+        <p>Register as Company</p>
+      </a>
+    </div>
+    <div class="row" style="height:5rem"></div>
+  </div>
+</div>
+
+{% endblock optional_main_nav %}
+
+
+<!--Second navbar-->
+{% block content %}
+
+<div class="to-expand" style="height:5rem; display:none;"></div>
+<!-- Recent Comapnies -->
+<div class="container" id="RecentJobs">
+  <p class="display-4 mt-3">Our Recent postings include...</p>
+  <div class="row mt-3">
+    <div class="card col-md p-3 m-3">
+      <img class="card-img-top" src="..." alt="Card image 1">
+      <div class="card-body">
+        <p class="card-text">Quick sample text to create the card title and make up the body of the card's content.
+        </p>
+      </div>
+    </div>
+    <div class="card col-md p-3 m-3">
+      <img class="card-img-top" src="..." alt="Card image 1">
+      <div class="card-body" id="this-one">
+        <p class="card-text">Quick sample text to create the card title and make up the body of the card's content.
+        </p>
+      </div>
+    </div>
+    <div class="card col-md p-3 m-3">
+      <img class="card-img-top" src="..." alt="Card image 1">
+      <div class="card-body">
+        <p class="card-text">Quick sample text to create the card title and make up the body of the card's content.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--Comapnies that love us-->
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <p class="text-center display-4">Companies that love us!</p>
+    <p class="lead"></p>
+    <!--Add comanies, logos and testimonial.-->
+  </div>
+</div>
+<hr style="width:80%">
+
+
+<!--Cards for pricing-->
+<div class="container" id="pricing">
+  <div class="row">
+    <div class="col-md card card-cascade wider m-3">
+      <!-- Card image -->
+      <div class="view view-cascade overlay">
+        <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/photo6.jpg" alt="Card image cap">
+        <a href="#!">
+          <div class="mask rgba-white-slight"></div>
+        </a>
+      </div>
+      <!-- Card content -->
+      <div class="card-body card-body-cascade text-center">
+        <!-- Title -->
+        <h4 class="card-title"><strong>Bronze Pack</strong></h4>
+        <!-- Subtitle -->
+        <h5 class="blue-text pb-2"><strong>Rs 499</strong></h5>
+        <!-- Text -->
+        <p class="card-text">Sed ut perspiciatis unde omnis iste natus sit voluptatem accusantium doloremque
+          laudantium, totam rem aperiam. </p>
+        <button class="btn purchase-btn">Purchase Now!</button>
+      </div>
+    </div>
+
+    <div class="col-md card card-cascade wider m-3">
+      <!-- Card image -->
+      <div class="view view-cascade overlay">
+        <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/photo6.jpg" alt="Card image cap">
+        <a href="#!">
+          <div class="mask rgba-white-slight"></div>
+        </a>
+      </div>
+      <!-- Card content -->
+      <div class="card-body card-body-cascade text-center">
+        <!-- Title -->
+        <h4 class="card-title"><strong>Silver Pack</strong></h4>
+        <!-- Subtitle -->
+        <h5 class="blue-text pb-2"><strong>Price</strong></h5>
+        <!-- Text -->
+        <p class="card-text">Sed ut perspiciatis unde omnis iste natus sit voluptatem accusantium doloremque
+          laudantium, totam rem aperiam. </p>
+        <button class="btn purchase-btn">Purchase Now!</button>
+      </div>
+    </div>
+
+    <div class="col-md card card-cascade wider m-3">
+      <!-- Card image -->
+      <div class="view view-cascade overlay">
+        <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/photo6.jpg" alt="Card image cap">
+        <a href="#!">
+          <div class="mask rgba-white-slight"></div>
+        </a>
+      </div>
+      <!-- Card content -->
+      <div class="card-body card-body-cascade text-center">
+        <!-- Title -->
+        <h4 class="card-title"><strong>Platinum Pack</strong></h4>
+        <!-- Subtitle -->
+        <h5 class="blue-text pb-2"><strong>Price</strong></h5>
+        <!-- Text -->
+        <p class="card-text">Sed ut perspiciatis unde omnis iste natus sit voluptatem accusantium doloremque
+          laudantium, totam rem aperiam. </p>
+        <button class="btn purchase-btn">Purchase Now!</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--Social media bar-->
+<div class="page-footer bg-light font-small darken-3">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 py-5 text-center">
+        <div class="flex-center">
+          <!-- Facebook -->
+          <a class="fb-ic">
+            <i class="fab fa-facebook-f fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+          </a>
+          <!-- Twitter -->
+          <a class="tw-ic">
+            <i class="fab fa-twitter fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+          </a>
+          <!-- Google +-->
+          <a class="gplus-ic">
+            <i class="fab fa-google-plus-g fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+          </a>
+          <!--Linkedin -->
+          <a class="li-ic">
+            <i class="fab fa-linkedin-in fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+          </a>
+          <!--Instagram-->
+          <a class="ins-ic">
+            <i class="fab fa-instagram fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+          </a>
+          <!--Pinterest-->
+          <a class="pin-ic">
+            <i class="fab fa-pinterest fa-lg white-text fa-2x"> </i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Footer -->
+{% endblock content %}
+
+{% block cust_scripts %}
+  <!--personal scripts-->
+  <script src="../static/index1.js"></script>
+{% endblock %}

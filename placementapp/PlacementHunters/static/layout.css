@@ -1,0 +1,56 @@
+html {
+    scroll-behavior: smooth;
+}
+.second-nav a{
+    text-decoration: none;
+    /* color:rgb(30,30,30); */
+    color:rgb(230, 230, 230);
+}
+.second-nav a:hover{
+    text-decoration: none;
+    /* color:rgb(30,30,30); */
+    color:rgb(230, 230, 230);
+}
+.second-nav{
+    /*background-color: rgba(195,88,98,1);*/
+    background-image: linear-gradient(166deg, rgba(35,136,190,1) , rgba(42, 110, 85,1));
+    z-index:100;
+}
+.nav-btn-2:hover{
+    background-color: rgba(35,136,190,1);
+    border: 0.1rem solid rgba(35,136,190,1);
+    transition : 0.5s;
+    color:white;
+}
+.header1{
+    width: 100%;
+    top: 0;
+}
+.progress-container {
+    width: 100%;
+    height: 0.5rem;
+    background: #ccc;
+}
+.progress-bar {
+    height: 0.5rem;
+    background: rgb(202, 19, 95);
+    width: 0%;
+}
+footer{
+    background-image: url("../static/images/architecture-buildings-city-24048431.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color:rgb(250,250,250);
+    text-shadow: 0 0 0.2rem rgba(0,0,0,0.4);
+}
+footer ul{
+    list-style: none;
+    padding:0;
+}
+
+/*
+https://www.w3schools.com/howto/howto_css_overlay.asp
+
+
+*/

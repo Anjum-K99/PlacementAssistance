@@ -1,0 +1,19 @@
+.mask1 {
+  -webkit-mask-image: linear-gradient(to right, rgba(55, 53, 170, 0.4), rgba(55, 53, 170, 0.7));
+  /* mask-image: linear-gradient(to right, rgba(55, 53, 170, 0.4),rgba(55, 53, 170, 0.8))); */
+  /* background-color:rgba(42, 28, 134, 0.7); */
+  padding-bottom: 6rem;
+}
+
+.jumbo-image{
+  background-image: url('../static/images/idk.jpg');
+  background-color: pink;
+  color:white;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+iframe{
+  border: 0.01rem solid darkgrey;
+}

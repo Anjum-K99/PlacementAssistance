@@ -1,0 +1,61 @@
+ <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4 p-5 left-side">
+        <div class="row">
+          <img src="../static/profile_pics/profile.jpg" style="width:100%;height:100%;">
+          <hr style="width:80%">
+        </div>
+        <div class="tab">
+          <button class="tablinks btn btn-profile" onclick="openTab(event, 'job-seeker-profile')">Profile</button><br>
+          <button class="tablinks btn btn-profile" onclick="openTab(event, 'job-seeker-resume')">Resume/Skillset</button><br>
+          <button class="tablinks btn btn-profile" onclick="openTab(event, 'job-seeker-applied-jobs')">Your Jobs</button>
+        </div>
+      </div>
+      <div class="col-md p-5 right-side">
+        <!--main page content will switch-->
+        <!--Profile page-->
+        <div class="profile-page tab-content" id="job-seeker-profile">
+          <p class="display-4">Hello, {{ username }}</p>
+          <p>Name:<span class="card">{{ "name goes here" }}</span></p>
+          <p>Age and DOB<span>{{ "age and DOB here" }}</span></p>
+          <p>Address: <span>{{ 'Address here' }}</span></p>
+          <p>Phone number: <span>{{ '998174545' }}</span></p>
+          <p>Aadhar number: <span>{{ '998174545' }}</span></p>
+          <p>Education details</p>
+          <!--add 12th, 10th, college and school and higher studies only name not marks.-->
+        </div>
+        <div class="resume-page tab-content" id="job-seeker-resume">
+          <!--Resume page-->
+          <p>10th schooling<span>{{ 'name of school' }}</span></p>
+          <p>Passing marks<span>{{ 'marks' }}</span></p>
+          <p>12th schooling<span>{{ 'name of school' }}</span></p>
+          <p>Passing marks<span>{{ 'marks' }}</span></p>
+          <p>College <span>{{ 'name of school' }}</span></p>
+          <!--only if checked.-->
+          <p>Degree Name <span>{{ 'Name of degree' }}</span></p>
+          <p>Passing CGPA<span>{{ 'marks' }}</span></p>
+          <p>Higher schooling<span>{{ 'name of school' }}</span></p>
+          <!--only if checked-->
+          <p>Passing marks<span>{{ 'marks' }}</span></p>
+          <!-- Add resume and skills details -->
+        </div>
+        <div class="jobspage tab-content" id="job-seeker-applied-jobs">
+          <!-- Jobs page -->
+          <div class='container'>
+            <!--jobs applied-->
+            <div class="row">
+              <!--content dynamically generated-->
+              <div class="card col-md p-3 m-3">
+                <img class="card-img-top" src="..." alt="Card image 1">
+                <div class="card-body">
+                  <p class="card-text">Quick sample text to create the card title and make up the body of the card's
+                    content.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
