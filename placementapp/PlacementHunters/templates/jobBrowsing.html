@@ -1,102 +1,75 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'layout.html' %}
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Job Browsing</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+{% block cust_stylesheet %}
+{% endblock %}
 
-</head>
-
-<body>
+{% block content %}
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-3 fixed-top bg-dark">
-        
+        <!--the filter options sidebar will go here-->
       </div>
       <div class="col-md">
-          <div class="container">
-              <div class="row">
-                <div class="col-md card card-cascade wider m-3">
-                  <!-- Card image -->
-                  <div class="view view-cascade overlay">
-                    <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/photo6.jpg" alt="Card image cap">
-                    <a href="#!">
-                      <div class="mask rgba-white-slight"></div>
-                    </a>
-                  </div>
-                  <!-- Card content -->
-                  <div class="card-body card-body-cascade text-center">
-                    <!-- Title -->
-                    <h4 class="card-title"><strong>Bronze Pack</strong></h4>
-                    <!-- Subtitle -->
-                    <h5 class="blue-text pb-2"><strong>Rs 499</strong></h5>
-                    <!-- Text -->
-                    <p class="card-text">Sed ut perspiciatis unde omnis iste natus sit voluptatem accusantium doloremque
-                      laudantium, totam rem aperiam. </p>
-                    <button class="btn purchase-btn">Purchase Now!</button>
-                  </div>
-                </div>
-            
-                <div class="col-md card card-cascade wider m-3">
-                  <!-- Card image -->
-                  <div class="view view-cascade overlay">
-                    <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/photo6.jpg" alt="Card image cap">
-                    <a href="#!">
-                      <div class="mask rgba-white-slight"></div>
-                    </a>
-                  </div>
-                  <!-- Card content -->
-                  <div class="card-body card-body-cascade text-center">
-                    <!-- Title -->
-                    <h4 class="card-title"><strong>Silver Pack</strong></h4>
-                    <!-- Subtitle -->
-                    <h5 class="blue-text pb-2"><strong>Price</strong></h5>
-                    <!-- Text -->
-                    <p class="card-text">Sed ut perspiciatis unde omnis iste natus sit voluptatem accusantium doloremque
-                      laudantium, totam rem aperiam. </p>
-                    <button class="btn purchase-btn">Purchase Now!</button>
-                  </div>
-                </div>
-            
-                <div class="col-md card card-cascade wider m-3">
-                  <!-- Card image -->
-                  <div class="view view-cascade overlay">
-                    <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/photo6.jpg" alt="Card image cap">
-                    <a href="#!">
-                      <div class="mask rgba-white-slight"></div>
-                    </a>
-                  </div>
-                  <!-- Card content -->
-                  <div class="card-body card-body-cascade text-center">
-                    <!-- Title -->
-                    <h4 class="card-title"><strong>Platinum Pack</strong></h4>
-                    <!-- Subtitle -->
-                    <h5 class="blue-text pb-2"><strong>Price</strong></h5>
-                    <!-- Text -->
-                    <p class="card-text">Sed ut perspiciatis unde omnis iste natus sit voluptatem accusantium doloremque
-                      laudantium, totam rem aperiam. </p>
-                    <button class="btn purchase-btn">Purchase Now!</button>
-                  </div>
-                </div>
-              </div>
-            </div>
+        <div class="container" id="recommended_jobs">
+        </div>
       </div>
     </div>
   </div>
+{% endblock content %}
 
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-  integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-  crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-  integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-  crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-  integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-  crossorigin="anonymous"></script>
-</body>
+{% block cust_scripts %}
+  <script>
+    function test_func(percent, jobs) {
+      console.log(percent);
+      console.log(jobs);
+      const container = document.getElementById('recommended_jobs');
+      var i, j;
+      var content = '';
+      console.log("percentage length", percent.length)
+      for (i = 0; i < percent.length; i++) {
+        console.log("outer loop", i)
+        var job_id = percent[i][0];
+        for (j = 0; j < jobs.length; j++) {
+          console.log("inner loop", j);
+          if (jobs[j][0] == job_id) break;
+        }
+        //j is the correct job tuple.
+        var job_descrip = jobs[j][1]
+        var package = jobs[j][2]
+        var num_open = jobs[j][3]
+        var company_id = jobs[j][4]
+        var percentage = percent[i][1]
+        if(i%3==0) content+=`<div class="row">`;
+        content += `<div class="col-md card card-cascade wider m-3">
+            <!-- Card image -->
+            <div class="view view-cascade overlay">
+              <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/photo6.jpg"
+                alt="Card image cap">
+              <a href="#!">
+                <div class="mask rgba-white-slight"></div>
+              </a>
+            </div>
 
-</html>
+            <!-- Card content -->
+            <div class="card-body card-body-cascade text-center">
+              <!-- Title -->
+              <h4 class="card-title"><strong>${job_descrip}</strong></h4>
+              <!-- Subtitle -->
+              <h5 class="blue-text pb-2"><strong>Package:${package}</strong></h5>
+              <h5 class="blue-text pb-2"><strong>Number of openings:${num_open}</strong></h5>
+              <h5 class="blue-text pb-2 text-muted"><strong>${percentage}% match!</strong></h5>
+              <!-- Text -->
+              <p class="card-text">Sed ut perspiciatis unde omnis iste natus sit voluptatem accusantium doloremque
+                laudantium, totam rem aperiam. </p>
+              <button class="btn purchase-btn">Apply</button>
+            </div>
+            </div>`;
+        if(i%3==2) content+=`</div>`;
+        console.log('end of outer',i)
+      }
+      container.innerHTML += content;
+    }
+    test_func({{ percent| safe }}, {{ jobs| safe }})
+
+  </script>
+{% endblock cust_scripts %}

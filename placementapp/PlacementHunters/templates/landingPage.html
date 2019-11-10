@@ -25,15 +25,15 @@
       </button>
 
       <div class="collapse navbar-collapse" id="collapsibleNavbar">
-        {% if current_user.is_authenticated %}
+        <!-- {# if current_user.is_authenticated #}
           <div class="ml-auto">
-            <a class="btn btn-sm nav-btn mr-2" name="Profile" href="{{ url_for('Profile') }}">Profile</a>
-            <a class="btn btn-sm nav-btn mr-2" name="Logout" href="{{ url_for('logout') }}">Logout</a>
+            <a class="btn btn-sm nav-btn mr-2" name="Profile" href="{# url_for('Profile') #}">Profile</a>
+            <a class="btn btn-sm nav-btn mr-2" name="Logout" href="{# url_for('logout') #}">Logout</a>
           </div>
-        {% else %}
+        {# else #} -->
           <form class="form-inline navbar-nav ml-auto" method="POST" action="">
             {{ form.hidden_tag() }}
-            <a class="btn btn-sm nav-btn mr-2" name="Contact us" href="{{ url_for('contact') }}">Contact Us</a>
+            <a class="btn btn-sm nav-btn mr-2" name="Contact us" href="{# url_for('contact') #}">Contact Us</a>
             <!-- <input type='text' name='uname' placeholder="Username" class="form-control form-control-sm nav-ip mr-2"> -->
             {{ form.username(class="form-control form-control-sm nav-ip mr-2",placeholder="Username") }}
             <!-- <input type='password' name='pwd' placeholder="Password" class="form-control form-control-sm nav-ip mr-3"> -->
@@ -60,7 +60,7 @@
             <!-- <button class="btn btn-light btn-sm nav-btn" name="login">Register!</button> -->
             {{ form.register(class="btn btn-sm nav-btn") }}
           </form>
-        {% endif %}
+        {# endif #}
       </div>
     </div>
   </nav>

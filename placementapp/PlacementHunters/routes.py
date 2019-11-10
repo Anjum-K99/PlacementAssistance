@@ -1,10 +1,10 @@
 from flask import Flask, render_template, redirect, flash, url_for,current_app, request
-from PlacementHunters import app, db, bcrypt
+from PlacementHunters import app#, db, bcrypt
 from PlacementHunters.forms import User_Registration, User_Information, Home_form
 from wtforms.validators import ValidationError
 from werkzeug.utils import secure_filename
-from PlacementHunters.model import Job_Seekers,Companies
-from flask_login import login_user, current_user, logout_user, login_required
+# from PlacementHunters.model import Job_Seekers,Companies
+# from flask_login import login_user, current_user, logout_user, login_required
 
 
 @app.route('/home')
@@ -90,6 +90,8 @@ def Profile():
 
     return render_template("profilePage.html")
 
+def recommendation():
+    #take job seeker info from current 
 @app.route('/JobPage')
 def Jobs():
     return render_template("jobBrowsing.html")
