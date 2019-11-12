@@ -6,7 +6,7 @@ from PlacementHunters.forms import Home_form
 
 #for psycopg:
 import psycopg2
-conn = psycopg2.connect("dbname=JobHunters user=postgres password=FuckYou1804")
+conn = psycopg2.connect("dbname=JobHunters user=postgres password=kjsce")
 cur = conn.cursor()
 print("connection successful",conn)
 
@@ -81,3 +81,11 @@ def Jobs():
     #percent is list of tuples and 
     #jobs is also list of tuples. 
     return render_template("jobBrowsing.html",percent = json.dumps(percent), jobs = json.dumps(jobs))
+
+@app.route('/allJobsPage')
+def all_Jobs():
+    query_str = f"SELECT * FROM public.\"Jobs\""#list all the possible jobs present on system
+    cur.execute(query_str)
+    jobs = cur.fetchall()
+    print(jobs)
+    return render_template("allJobsPage.html")
