@@ -1,7 +1,7 @@
 from PlacementHunters import app
-from flask import Flask, render_template, redirect
+from flask import Flask, render_template, redirect, url_for
 import json
-from PlacementHunters.forms import Home_form
+from PlacementHunters.forms import Home_form,Company_reg
 # from PlacementHunters.forms import Job_Seeker, User_Information, Home_form
 
 #for psycopg:
@@ -81,3 +81,21 @@ def Jobs():
     #percent is list of tuples and 
     #jobs is also list of tuples. 
     return render_template("jobBrowsing.html",percent = json.dumps(percent), jobs = json.dumps(jobs))
+
+@app.route('/CompanyReg',methods=['GET','POST'])
+def Company_registration():
+    form = Company_reg()
+    if form.validate_on_submit():
+        print("company form valid")
+        try:
+            query_str = f"INSERT INTO public.\"Comapny\"(\"GSTIN\",name, username, mobile, location, password, website) VALUES ({int(form.GSTIN.data)}, '{form.name.data}', '{form.username.data}', '{form.mobile.data}', '{form.address.data}',' {form.password.data}', '{form.website.data}')"
+            cur.execute(query_str)
+            conn.commit()
+            count = cur.rowcount
+            print (count, "Record inserted successfully into company table")
+        except (Exception, psycopg2.Error) as error :
+            if(conn):
+                print("Failed to insert record into company table", error)
+        return redirect(url_for('comapy_profile'))#go for further information
+    return render_template("company_reg.html",form = form)
+
