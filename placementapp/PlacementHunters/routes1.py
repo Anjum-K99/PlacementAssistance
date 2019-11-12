@@ -6,7 +6,7 @@ from PlacementHunters.forms import Home_form,Company_reg
 
 #for psycopg:
 import psycopg2
-conn = psycopg2.connect("dbname=JobHunters user=postgres password=FuckYou1804")
+conn = psycopg2.connect("dbname=JobHunters user=postgres password=kjsce")
 cur = conn.cursor()
 print("connection successful",conn)
 
@@ -99,3 +99,10 @@ def Company_registration():
         return redirect(url_for('comapy_profile'))#go for further information
     return render_template("company_reg.html",form = form)
 
+@app.route('/allJobsPage')
+def all_Jobs():
+    query_str = f"SELECT * FROM public.\"Jobs\""#list all the possible jobs present on system
+    cur.execute(query_str)
+    jobs = cur.fetchall()
+    print(jobs)
+    return render_template("allJobsPage.html")
