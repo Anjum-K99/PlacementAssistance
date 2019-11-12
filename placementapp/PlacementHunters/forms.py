@@ -76,3 +76,21 @@ class Home_form(FlaskForm):
 
 # class Companies(FalskForm):
 
+class Company_reg(FlaskForm):
+    GSTIN = StringField('GSTIN Number',validators=[DataRequired(),Length(min=15,max=15)])
+    name = StringField('Enter name of comapny')
+    username = StringField('Username',validators=[DataRequired(),Length(min=2,max=20)])
+    website = StringField('Enter comapny website',validators=[DataRequired()])
+    mobile = IntegerField('Mobile Number',validators=[DataRequired(),NumberRange(min=7000000000,max=9999999999,message="Enter valid mobile number")])
+    address = TextAreaField('Address', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    submit = SubmitField('Sign Up')
+
+    def website_check(self, website):
+        allowed = ['com','in','org','co']
+        x = field.data.split('.')[-1]
+        if (x not in allowed):
+            raise ValidationError('Incorrect website format try agin. Allowed extensions include: .com, .in, .co, .org')
+        
+
+
