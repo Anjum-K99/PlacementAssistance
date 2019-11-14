@@ -1,12 +1,12 @@
 from PlacementHunters import app
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for,request
 import json
 from PlacementHunters.forms import Home_form,Company_reg
 # from PlacementHunters.forms import Job_Seeker, User_Information, Home_form
 
 #for psycopg:
 import psycopg2
-conn = psycopg2.connect("dbname=JobHunters user=postgres password=kjsce")
+conn = psycopg2.connect("dbname=JobHunters user=postgres password=FuckYou1804")
 cur = conn.cursor()
 print("connection successful",conn)
 
@@ -106,3 +106,16 @@ def all_Jobs():
     jobs = cur.fetchall()
     print(jobs)
     return render_template("allJobsPage.html")
+
+@app.route('/CompanyProfile',methods=['GET','POST'])
+def company_profile():
+    #get company id from the table or session variable. 
+    GSTIN = 157432456985741
+    query_str = f"SELECT * FROM public.\"Comapny\" WHERE \"GSTIN\" = {GSTIN};"
+    cur.execute(query_str)
+    company = cur.fetchone()#returns a tuple.
+    print("comapyfetch",company)
+    # data = request.get_json()
+    # print(data)
+    # print(type(data))
+    return render_template("CompanyProfile.html",company= company)
