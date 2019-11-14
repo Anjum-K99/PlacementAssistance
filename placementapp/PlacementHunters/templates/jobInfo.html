@@ -4,27 +4,24 @@
 {% endblock %}
 
 {% block content %}
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-3 fixed-top bg-dark">
-      <!--the filter options sidebar will go here-->
-    </div>
-    <div class="col-md">
-      <div class="container" id="displayjob">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3 fixed-top bg-dark">
+        <!--the filter options sidebar will go here-->
+      </div>
+      <div class="col-md">
+        <div class="container" id="displayjob">
+        </div>
       </div>
     </div>
   </div>
-</div>
 {% endblock content %}
 
 {% block cust_scripts %}
-<script>
-  console.log("here")
-  function test_func(job) {
-    console.log("here")
-    const container = document.getElementById('displayjob');
-    console.log(container)
-    container.innerHTML += `<h3>${job[1]}</h3>
+  <script>
+    function test_func(job) {
+        const container = document.getElementById('displayjob');
+        container.innerHTML += `<h3>${job[1]}</h3>
         <h3>${job[2]}</h3>
         <h3>${job[3]}</h3>
         <h3>${job[4]}</h3>
@@ -34,7 +31,8 @@
         <button><a href="${job[0]}/cancel">Cancel Application?</a></button>
         {% endif %}
         `;
-  }
-  test_func({{ job| safe }})
-</script>
+    }
+    test_func({{ job| safe }})
+
+  </script>
 {% endblock cust_scripts %}
