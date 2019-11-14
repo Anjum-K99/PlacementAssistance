@@ -6,7 +6,7 @@ from PlacementHunters.forms import Home_form, Job_Seeker, Seeker_Info, add_jobs_
 
 #for psycopg:
 import psycopg2
-conn = psycopg2.connect("dbname=JobHunters2 user=postgres password=kjsce")
+conn = psycopg2.connect("dbname=JobHunters2 user=postgres password=FuckYou1804")
 cur = conn.cursor()
 print("connection successful",conn)
 
@@ -119,9 +119,10 @@ def recommendation():
             for x in job_skillset:
                 if x in seeker_skillset:#even seeker has this skill
                     num+=1
-            percentage = (num/len(job_skillset))*100
-            percent[job[5]] = percentage
-            print("for job",job[0],"the percentage is",percentage,"And the ditionary is",percent)
+            if(len(job_skillset)>0):
+                percentage = (num/len(job_skillset))*100
+                percent[job[5]] = percentage
+                print("for job",job[0],"the percentage is",percentage,"And the ditionary is",percent)
         '''
         we can work only on the skil_id and dont eeven need to find the corresponding skill name 
         '''
@@ -131,7 +132,7 @@ def recommendation():
     return [],jobs
 
 
-@app.route('/JobPage/<string:x>')
+@app.route('/JobPage/<string:x>')#/all /mumbai / delhi on knowmore jobinfo/id
 def Jobs(x):
     form2 = Home_form()
     percent,jobs=recommendation()
@@ -172,13 +173,13 @@ def Company_registration():
     return render_template("company_reg.html",form = form)
 
 
-@app.route('/allJobsPage')# ** where is the hmtl
-def all_Jobs():
-    query_str = f"SELECT * FROM public.\"Jobs\""#list all the possible jobs present on system
-    cur.execute(query_str)
-    jobs = cur.fetchall()
-    print(jobs)
-    return render_template("allJobsPage.html")
+# @app.route('/allJobsPage')# ** where is the hmtl
+# def all_Jobs():
+#     query_str = f"SELECT * FROM public.\"Jobs\""#list all the possible jobs present on system
+#     cur.execute(query_str)
+#     jobs = cur.fetchall()
+#     print(jobs)
+#     return render_template("allJobsPage.html")
 
    
 
@@ -215,6 +216,7 @@ def company_profile():
 def js_signup():
     form = Job_Seeker()
     if form.validate_on_submit():
+        print("inside valid")
         q1 = f"SELECT aadhar_number FROM public.\"Job_Seekers\" WHERE username='{form.username.data}'"
         cur.execute(q1)
         user_name = cur.fetchone()
@@ -385,7 +387,7 @@ def job_info(job_id):
     cur.execute(q1) 
     a=cur.fetchone()
     if a is not None:  
-        an = cur.fetchone()[0] 
+        an = a[0]
         if an in applied:
             yes = 1
         else:
@@ -395,7 +397,7 @@ def job_info(job_id):
         yes=-1
     return render_template('jobInfo.html',job=json.dumps(job),yes=yes) 
 
-@app.route('/jobinfo/<int:job_id>/applied')
+@app.route('/JobPage/jobinfo/<int:job_id>/applied')
 def apply(job_id):
     js_username = getSession()
     print("hi")
@@ -408,7 +410,7 @@ def apply(job_id):
     conn.commit()
     return redirect(url_for('job_info',job_id=job_id))
 
-@app.route('/jobinfo/<int:job_id>/cancel')
+@app.route('/JobPage/jobinfo/<int:job_id>/cancel')
 def cancel(job_id):
     js_username = getSession()
     print("hi")
