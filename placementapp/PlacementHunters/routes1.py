@@ -6,7 +6,7 @@ from PlacementHunters.forms import Home_form, Job_Seeker, Seeker_Info, add_jobs_
 
 #for psycopg:
 import psycopg2
-conn = psycopg2.connect("dbname=JobHunters2 user=postgres password=FuckYou1804")
+conn = psycopg2.connect("dbname=JobHunters2 user=postgres password=kjsce")
 cur = conn.cursor()
 print("connection successful",conn)
 
@@ -84,20 +84,20 @@ def recommendation():
         print(jobs)
         for job in jobs:#for each job find the percentage. 
             job_skillset = []
-            query_str = f"SELECT skill_id FROM jobs_skills WHERE job_id = {job[0]}"
+            query_str = f"SELECT skill_id FROM jobs_skills WHERE job_id = {job[5]}"
             cur.execute(query_str)
             skills = cur.fetchall() 
             print("skills in job",skills)
             for skill in skills:
                 job_skillset.append(skill[0])
-            print("job skillset is",job_skillset,"for job",job[0])
+            print("job skillset is",job_skillset,"for job",job[5])
             num = 0
             #calculate percentage:
             for x in job_skillset:
                 if x in seeker_skillset:#even seeker has this skill
                     num+=1
             percentage = (num/len(job_skillset))*100
-            percent[job[0]] = percentage
+            percent[job[5]] = percentage
             print("for job",job[0],"the percentage is",percentage,"And the ditionary is",percent)
         '''
         we can work only on the skil_id and dont eeven need to find the corresponding skill name 
@@ -324,11 +324,7 @@ def job_info(job_id):
     else:
         yes = 0
     print(yes)
-<<<<<<< HEAD
-    return render_template('jobInfo.html',job=json.dumps(job),yes=yes)
-=======
     return render_template('jobInfo.html',job=json.dumps(job),yes=yes) 
->>>>>>> refs/remotes/origin/master
 
 @app.route('/jobinfo/<int:job_id>/applied')
 def apply(job_id):
