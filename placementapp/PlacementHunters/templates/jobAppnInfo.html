@@ -1,0 +1,61 @@
+{% extends 'layout.html' %}
+
+{% block cust_stylesheet %}
+{% endblock %}
+
+{% block content %}
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3 fixed-top bg-dark">
+        <!--the filter options sidebar will go here-->
+      </div>
+      <div class="col-md">
+        <div class="container" id="displayseekers">
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+
+{% block cust_scripts %}
+  <script>
+    function test_func(seekers,allskills) {
+        const container = document.getElementById('displayseekers');
+        console.log(seekers);
+        console.log(allskills)
+        for(i=0;i<seekers.length;i++){
+            console.log(i);
+            container.innerHTML+=`<div class="row">
+                <div class="col-md card card-cascade wider m-3">
+                <h3>Name: ${seekers[i][2]}. ${seekers[i][3]}. ${seekers[i][4]}</h3>
+                <h3>Gender: ${seekers[i][6]}</h3>
+                <h3>Contact: ${seekers[i][7]}</h3>
+                <h3>Email: ${seekers[i][8]}</h3>
+                <h3>About: ${seekers[i][22]}</h3>
+                <h3>Hobbies: ${seekers[i][23]}</h3>
+                <h3>School: ${seekers[i][10]}</h3>
+                <h3>10th Percentage: ${seekers[i][11]}</h3>
+                <h3>Junior College: ${seekers[i][12]}</h3>
+                <h3>12th Percentage: ${seekers[i][13]}</h3>
+                <h3>Graduation details</h3>
+                <h3>College: ${seekers[i][14]}</h3>
+                <h3>Course: ${seekers[i][16]}</h3>
+                <h3>CGPA: ${seekers[i][15]}</h3>
+                <h3>Year Of Passing: ${seekers[i][17]}</h3>
+                <h3>Post Graduation details</h3>
+                <h3>College: ${seekers[i][18]}</h3>
+                <h3>Course: ${seekers[i][20]}</h3>
+                <h3>CGPA: ${seekers[i][19]}</h3>
+                <h3>Year Of Passing: ${seekers[i][21]}</h3>
+                <h3>skills:</h3>`;
+                for(j=0;j<allskills[i].length;j++){
+                    container.innerHTML+=`${allskills[i][j]},`;
+                }
+                container.innerHTML+=`</div>
+                </div>`;
+        }
+    }
+    test_func({{ seekers| safe }},{{ allskills| safe }})
+
+  </script>
+{% endblock cust_scripts %}

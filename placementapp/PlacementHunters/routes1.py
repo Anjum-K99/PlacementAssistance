@@ -6,7 +6,7 @@ from PlacementHunters.forms import Home_form, Job_Seeker, Seeker_Info, add_jobs_
 
 #for psycopg:
 import psycopg2
-conn = psycopg2.connect("dbname=JobHunters2 user=postgres password=FuckYou1804")
+conn = psycopg2.connect("dbname=JobHunters2 user=postgres password=kjsce")
 cur = conn.cursor()
 print("connection successful",conn)
 
@@ -84,20 +84,20 @@ def recommendation():
         print(jobs)
         for job in jobs:#for each job find the percentage. 
             job_skillset = []
-            query_str = f"SELECT skill_id FROM jobs_skills WHERE job_id = {job[0]}"
+            query_str = f"SELECT skill_id FROM jobs_skills WHERE job_id = {job[5]}"
             cur.execute(query_str)
             skills = cur.fetchall() 
             print("skills in job",skills)
             for skill in skills:
                 job_skillset.append(skill[0])
-            print("job skillset is",job_skillset,"for job",job[0])
+            print("job skillset is",job_skillset,"for job",job[5])
             num = 0
             #calculate percentage:
             for x in job_skillset:
                 if x in seeker_skillset:#even seeker has this skill
                     num+=1
             percentage = (num/len(job_skillset))*100
-            percent[job[0]] = percentage
+            percent[job[5]] = percentage
             print("for job",job[0],"the percentage is",percentage,"And the ditionary is",percent)
         '''
         we can work only on the skil_id and dont eeven need to find the corresponding skill name 
@@ -352,3 +352,49 @@ def cancel(job_id):
     cur.execute(q2)
     conn.commit()
     return redirect(url_for('job_info',job_id=job_id))
+
+
+@app.route('/jobappninfo/<int:job_id>')
+def job_application_info(job_id):
+    q1 = f"SELECT \"Seeker_id\" from public.\"Job_Application\" where job_id={job_id}"
+    cur.execute(q1)
+    applies = cur.fetchall()
+    applied = [item for t in applies for item in t]
+    print(applied)
+    seekers=[]
+    allskills=[]
+    for i in range(len(applied)):
+        q1 = f"SELECT * from public.\"Job_Seekers\" where aadhar_number={applied[i]}"
+        cur.execute(q1)   
+        an = cur.fetchone() 
+        # print(an)
+        s=[]
+        for j in an:
+            if j is None:
+                s.append('-')
+            else:
+                s.append(j)
+        # print(s)
+        seekers.append(s)
+        q2 =f"SELECT skill_id FROM public.seeker_skills where seeker_id='{applied[i]}'"
+        cur.execute(q2)
+        ab = cur.fetchall()
+        skill=[]
+        for j in ab:
+            for k in j:
+                skill.append(k)
+        print(skill)
+        skills=[]
+        for j in skill:
+            q3 = f"SELECT name from public.skills where skill_id={j}"
+            cur.execute(q3)
+            a=cur.fetchone()
+            if a is not None:
+                skills.append(a[0])
+        allskills.append(skills)
+        
+    print(allskills)
+    print(seekers)
+
+
+    return render_template('jobAppnInfo.html',seekers=json.dumps(seekers),allskills=json.dumps(allskills))

@@ -264,7 +264,7 @@
 <script src="{{url_for('static', filename='init.js')}}"></script>
 <script type="text/javascript">
     function yesnoCheck(x){
-        
+        console.log("hii")
         if(x==1){
              document.getElementById('post_grad').style.display = 'block';
             // document.getElementById('no').checked = false;
@@ -273,6 +273,6 @@
             document.getElementById('post_grad').style.display = 'none';
             // document.getElementById('yes').checked = false;
         }
-    
+    }
 </script>  
 {% endblock cust_scripts %}
