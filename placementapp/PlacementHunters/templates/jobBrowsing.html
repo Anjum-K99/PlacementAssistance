@@ -3,8 +3,13 @@
 {% block cust_stylesheet %}
 {% endblock %}
 
+{% block navbar1 %}
+{% include 'navbar1.html' %}
+{% endblock navbar1 %}
+
+
 {% block content %}
-  <div class="container-fluid">
+  <div class="container-fluid mt-5">
     <div class="row">
       <div class="col-md-3 fixed-top bg-dark">
         <!--the filter options sidebar will go here-->
@@ -41,7 +46,7 @@
           var company_id = jobs[j][4]
           var percentage = percent[i][1]
           if(i%3==0) content+=`<div class="row">`;
-          content += `<div class="col-md card card-cascade wider m-3">
+          content += `<div class="col-md card card-cascade wider p-3">
               <!-- Card image -->
               <div class="view view-cascade overlay">
                 <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/photo6.jpg"

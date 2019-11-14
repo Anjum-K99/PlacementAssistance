@@ -1,122 +1,153 @@
 {% extends 'layout.html' %}
 
-{% block content %}
-<div class="containerfluid">
-  <div class="row">
-    <div class="col-md">
-      <form method="POST" action="">
-        {{ form.hidden_tag() }}
+{% block cust_stylesheet %}
+<link rel="stylesheet" href="../static/company_reg.css">
+{% endblock %}
 
-        <div class="form-group"><!--GSTIN-->
+{% block content %}
+<div class="container-fluid">
+  <div class="container">
+    <div class="row mt-5 justify-content-center">
+      <p class = "display-4"> 
+        Company Registration<br>
+        <hr style="width:90%">
+      </p>
+      <div class="col-md-5 form-class py-4 mb-4">
+        <form method="POST" action="">
+          {{ form.hidden_tag() }}
+
+          <div class="form-group">
+            <!--GSTIN-->
             {{ form.GSTIN.label(class = "fom-control-label") }}
-  
+
             {% if form.GSTIN.errors %}
             {{ form.GSTIN(class="form-control form-control-lg is-invalid") }}
-            <div class="invalid-feedback"><!--ony show this div on errors-->
+            <div class="invalid-feedback">
+              <!--ony show this div on errors-->
               {% for error in form.GSTIN.errors %}
               <span>{{ error }}</span>
               {% endfor %}
             </div>
             {% else %}
-            {{ form.GSTIN(class="form-control form-control-lg") }}<!--normal input field-->
+            {{ form.GSTIN(class="form-control form-control-lg") }}
+            <!--normal input field-->
             {% endif %}
-        </div>
-
-        <div class="form-group"><!--name-->
-          {{ form.name.label(class = "fom-control-label") }}
-
-          {% if form.name.errors %}
-          {{ form.name(class="form-control form-control-lg is-invalid") }}
-          <div class="invalid-feedback"><!--ony show this div on errors-->
-            {% for error in form.name.errors %}
-            <span>{{ error }}</span>
-            {% endfor %}
           </div>
-          {% else %}
-          {{ form.name(class="form-control form-control-lg") }}<!--normal input field-->
-          {% endif %}
-      </div>
-        
-        <div class="form-group"><!--username-->
-          {{ form.username.label(class = "fom-control-label") }}
 
-          {% if form.username.errors %}
-          {{ form.username(class="form-control form-control-lg is-invalid") }}
-          <div class="invalid-feedback"><!--ony show this div on errors-->
-            {% for error in form.username.errors %}
-            <span>{{ error }}</span>
-            {% endfor %}
+          <div class="form-group">
+            <!--name-->
+            {{ form.name.label(class = "fom-control-label") }}
+
+            {% if form.name.errors %}
+            {{ form.name(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+              <!--ony show this div on errors-->
+              {% for error in form.name.errors %}
+              <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+            {% else %}
+            {{ form.name(class="form-control form-control-lg") }}
+            <!--normal input field-->
+            {% endif %}
           </div>
-          {% else %}
-          {{ form.username(class="form-control form-control-lg") }}<!--normal input field-->
-          {% endif %}
-        </div>
 
-        <div class="form-group"><!--password-->
+          <div class="form-group">
+            <!--username-->
+            {{ form.username.label(class = "fom-control-label") }}
+
+            {% if form.username.errors %}
+            {{ form.username(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+              <!--ony show this div on errors-->
+              {% for error in form.username.errors %}
+              <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+            {% else %}
+            {{ form.username(class="form-control form-control-lg") }}
+            <!--normal input field-->
+            {% endif %}
+          </div>
+
+          <div class="form-group">
+            <!--password-->
             {{ form.password.label(class = "fom-control-label") }}
-  
+
             {% if form.password.errors %}
             {{ form.password(class="form-control form-control-lg is-invalid") }}
-            <div class="invalid-feedback"><!--ony show this div on errors-->
+            <div class="invalid-feedback">
+              <!--ony show this div on errors-->
               {% for error in form.password.errors %}
               <span>{{ error }}</span>
               {% endfor %}
             </div>
             {% else %}
-            {{ form.password(class="form-control form-control-lg") }}<!--normal input field-->
+            {{ form.password(class="form-control form-control-lg") }}
+            <!--normal input field-->
             {% endif %}
-        </div>
+          </div>
 
-        <div class="form-group"><!--website-->
+          <div class="form-group">
+            <!--website-->
             {{ form.website.label(class = "fom-control-label") }}
-  
+
             {% if form.website.errors %}
             {{ form.website(class="form-control form-control-lg is-invalid") }}
-            <div class="invalid-feedback"><!--ony show this div on errors-->
+            <div class="invalid-feedback">
+              <!--ony show this div on errors-->
               {% for error in form.website.errors %}
               <span>{{ error }}</span>
               {% endfor %}
             </div>
             {% else %}
-            {{ form.website(class="form-control form-control-lg") }}<!--normal input field-->
+            {{ form.website(class="form-control form-control-lg") }}
+            <!--normal input field-->
             {% endif %}
-        </div>
+          </div>
 
-        <div class="form-group"><!--mobile-->
+          <div class="form-group">
+            <!--mobile-->
             {{ form.mobile.label(class = "fom-control-label") }}
-  
+
             {% if form.mobile.errors %}
             {{ form.mobile(class="form-control form-control-lg is-invalid") }}
-            <div class="invalid-feedback"><!--ony show this div on errors-->
+            <div class="invalid-feedback">
+              <!--ony show this div on errors-->
               {% for error in form.mobile.errors %}
               <span>{{ error }}</span>
               {% endfor %}
             </div>
             {% else %}
-            {{ form.mobile(class="form-control form-control-lg") }}<!--normal input field-->
+            {{ form.mobile(class="form-control form-control-lg") }}
+            <!--normal input field-->
             {% endif %}
-        </div>
+          </div>
 
-        <div class="form-group"><!--address-->
+          <div class="form-group">
+            <!--address-->
             {{ form.address.label(class = "fom-control-label") }}
-  
+
             {% if form.address.errors %}
             {{ form.address(class="form-control form-control-lg is-invalid") }}
-            <div class="invalid-feedback"><!--ony show this div on errors-->
+            <div class="invalid-feedback">
+              <!--ony show this div on errors-->
               {% for error in form.address.errors %}
               <span>{{ error }}</span>
               {% endfor %}
             </div>
             {% else %}
-            {{ form.address(class="form-control form-control-lg") }}<!--normal input field-->
+            {{ form.address(class="form-control form-control-lg") }}
+            <!--normal input field-->
             {% endif %}
-        </div>
+          </div>
 
-        <div class="form-group">
+          <div class="form-group">
             {{ form.submit(class="btn btn-info")}}
-        </div>
+          </div>
 
-      </form>
+        </form>
+      </div>
     </div>
   </div>
 </div>

@@ -11,69 +11,11 @@
   <link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans&display=swap" rel="stylesheet"> 
 {% endblock cust_stylesheet%}
 
+{% block navbar1 %}
+{% include 'navbar1.html' %}
+{% endblock navbar1 %}
+
 {% block optional_main_nav %}
-
-<!-- main content here -->
-<!--Main Navbar-->
-<header class="container-fluid">
-  <nav class="navbar navbar-expand-md navbar-light fixed-top main-nav">
-    <!--make this something else -->
-    <div class="container-fluid">
-      <a href="#"></a>
-      <!--for logo -->
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="collapsibleNavbar">
-        <!-- {# if current_user.is_authenticated #}
-          <div class="ml-auto">
-            <a class="btn btn-sm nav-btn mr-2" name="Profile" href="{# url_for('Profile') #}">Profile</a>
-            <a class="btn btn-sm nav-btn mr-2" name="Logout" href="{# url_for('logout') #}">Logout</a>
-          </div>
-        {# else #} -->
-        {% if 'username' in session %}
-        <div class="navbar-nav ml-auto"></div>
-          <div class="nav-ip mr-2">Welcome, {{session.username}}</div>
-          <a class="btn btn-sm nav-btn mr-2" href="logout">Logout</a>
-        </div>
-        {% else %}
-          <form class="form-inline navbar-nav ml-auto" method="POST" action="">
-            {{ form.hidden_tag() }}
-            <a class="btn btn-sm nav-btn mr-2" name="Contact us" href="{# url_for('contact') #}">Contact Us</a>
-            <!-- <input type='text' name='uname' placeholder="Username" class="form-control form-control-sm nav-ip mr-2"> -->
-           
-            <!-- <input type='password' name='pwd' placeholder="Password" class="form-control form-control-sm nav-ip mr-3"> -->
-            {% if form.username.errors %}
-              {{ form.username(class="form-control form-control-sm is-invalid") }}
-              <div class="invalid-feedback">
-                  {% for error in form.username.errors %}
-                      <span>{{ error }}</span>
-                  {% endfor %}
-              </div>
-            {% else %}
-                {{ form.username(class="form-control form-control-sm nav-ip mr-2",placeholder="Username") }}
-            {% endif %}
-
-            {% if form.password.errors %}
-              {{ form.password(class="form-control orm-control-sm is-invalid") }}
-              <div class="invalid-feedback">
-                  {% for error in form.password.errors %}
-                      <span>{{ error }}</span>
-                  {% endfor %}
-              </div>
-            {% else %}
-                {{ form.password(class="form-control form-control-sm nav-ip mr-2",placeholder='Password') }}
-            {% endif %}
-            <!-- <button class="btn btn-light btn-sm nav-btn mr-2" name="login">Log In </button> -->
-            {{ form.login(class="btn btn-sm nav-btn mr-2") }}
-          </form>
-        {% endif %}
-      </div>
-    </div>
-  </nav>
-</header>
-
 
 <!--Main Jumbotron-->
 <div class="intro-page">
@@ -103,6 +45,9 @@
 
 {% endblock optional_main_nav %}
 
+{% block navbar2 %}
+{% include 'navbar2.html' %}
+{% endblock navbar2 %}
 
 <!--Second navbar-->
 {% block content %}

@@ -37,7 +37,7 @@ def home():
                 form.username.errors.append(error)
                 form.password.data=""
                 return render_template("landingPage.html", title="Home",form=form,session=session)
-    return render_template("landingPage.html", title="Home",form=form,session=session)
+    return render_template("landingPage.html", title="Home",navform=form,session=session)
 
 @app.route('/logout')
 def logout():
@@ -110,12 +110,13 @@ def recommendation():
 
 @app.route('/JobPage')
 def Jobs():
+    form2 = Home_form()
     percent,jobs = recommendation()
     print(percent)
     print(jobs)
     #percent is list of tuples and 
     #jobs is also list of tuples. 
-    return render_template("jobBrowsing.html",percent = json.dumps(percent), jobs = json.dumps(jobs))
+    return render_template("jobBrowsing.html",percent = json.dumps(percent), jobs = json.dumps(jobs),navform = form2)
 
 @app.route('/CompanyReg',methods=['GET','POST'])
 def Company_registration():
@@ -148,8 +149,8 @@ def all_Jobs():
 @app.route('/CompanyProfile',methods=['GET','POST'])
 def company_profile():
     #get company id from the table or session variable. 
-    # comapny_username = getSession()#** change
-    comapny_username = 'info_ker'
+    comapny_username = getSession()#** change
+    # comapny_username = 'info_ker'
     query_str = f"SELECT \"GSTIN\" FROM public.\"Comapny\" WHERE username = '{comapny_username}';"
     cur.execute(query_str)
     GSTIN = cur.fetchone()[0]

@@ -1,0 +1,16 @@
+.form-class{
+    background-color:rgba(0,0,0,0.4);
+    color:white;
+}
+body{
+    background-image: url('../static/images/white-concrete-building-with-glass-windows-2977104.jpg');
+    /* background-color:linear-gradient(166deg, rgba(35,136,190,1) , rgba(42, 110, 85,1)); */
+    background-color: rgba(255,255,255,0.4);
+    background-blend-mode: overlay;
+    background-size: cover;
+    height:80%;
+    width:100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
