@@ -1,7 +1,17 @@
 from PlacementHunters import app
+<<<<<<< HEAD
 from flask import Flask, render_template, redirect, url_for,request
+=======
+<<<<<<< HEAD
+from flask import Flask, render_template, redirect, url_for, session, flash
 import json
-from PlacementHunters.forms import Home_form,Company_reg
+from PlacementHunters.forms import Home_form, Job_Seeker, Seeker_Info
+=======
+from flask import Flask, render_template, redirect, url_for
+>>>>>>> ad4311b328fdb776088b960b3f2e2cade4d436ae
+import json
+from PlacementHunters.forms import Home_form,Company_reg,add_jobs
+>>>>>>> 0a7c54a70c1e4bc8e36afc8c958c094bb144bf4f
 # from PlacementHunters.forms import Job_Seeker, User_Information, Home_form
 
 #for psycopg:
@@ -10,14 +20,39 @@ conn = psycopg2.connect("dbname=JobHunters user=postgres password=FuckYou1804")
 cur = conn.cursor()
 print("connection successful",conn)
 
-@app.route('/')
-@app.route('/home')
+@app.route('/',methods=['GET','POST'])
+@app.route('/home',methods=['GET','POST'])
 def home():
     form = Home_form() #insatnce of form
     print("main route")
-    return render_template("landingPage.html", title="Home",form=form)
 
+    if form.validate_on_submit():
+        q1 = f"SELECT password FROM public.\"Job_Seekers\" WHERE username='{form.username.data}'"
+        cur.execute(q1)
+        pw = cur.fetchone()
+        if pw[0] is "null":
+            error='Username is incorrect'
+            form.username.errors.append(error)
+            return render_template("landingPage.html", title="Home",form=form,session=session)
+        else:
+            if pw[0]==form.password.data:
+                session['username']=form.username.data
+                form.username.data=""
+                form.password.data=""
+                #flash(f'You were successfully logged in','success')
+                print("LOGGEDIN")
+                return render_template("landingPage.html",title="Home",form=form,session=session)
+            else:
+                error='Password is incorrect'
+                form.username.errors.append(error)
+                form.password.data=""
+                return render_template("landingPage.html", title="Home",form=form,session=session)
+    return render_template("landingPage.html", title="Home",form=form,session=session)
 
+@app.route('/logout')
+def logout():
+    session.pop('username',None)
+    return redirect(url_for('home'))
 
 # @app.route('/sign',methods=['GET','POST'])
 # def user_reg():
@@ -105,6 +140,7 @@ def all_Jobs():
     cur.execute(query_str)
     jobs = cur.fetchall()
     print(jobs)
+<<<<<<< HEAD
     return render_template("allJobsPage.html")
 
 @app.route('/CompanyProfile',methods=['GET','POST'])
@@ -119,3 +155,94 @@ def company_profile():
     # print(data)
     # print(type(data))
     return render_template("CompanyProfile.html",company= company)
+=======
+    return render_template("allJobsPage.html",jobs = json.dumps(jobs))
+
+
+@app.route('/jsSignUp',methods=['GET','POST'])
+def js_signup():
+    form = Job_Seeker()
+    if form.validate_on_submit():
+        q1 = f"SELECT aadhar_number FROM public.\"Job_Seekers\" WHERE username='{form.username.data}'"
+        cur.execute(q1)
+        user_name = cur.fetchone()
+        if json.dumps(user_name) is not "null":
+            error='Username already exists'
+            form.username.errors.append(error)
+            return render_template("user_reg.html",form=form)
+        else:
+            query_str = f"""INSERT into public.\"Job_Seekers\"(aadhar_number,username,firstname,middlename,
+                lastname,address,gender,mobile,emailid,password,dob) VALUES ({form.aadhar_number.data},
+                '{form.username.data}','{form.firstname.data}','{form.middlename.data}','{form.lastname.data}',
+                '{form.address.data}','{form.gender.data}',{form.mobile.data},'{form.emailid.data}','{form.password.data}','{form.dob.data}')"""
+            try:
+                cur.execute(query_str)
+                conn.commit()
+                session['username']=form.username.data
+                # print(session['username'])
+                return redirect(url_for('js_info'))
+            except(Exception, psycopg2.DatabaseError) as error:
+                print(error)          
+    return render_template("user_reg.html",form=form)
+
+def getSession():
+    if 'username' in session:
+        return session['username']
+    return 0
+
+@app.route('/Info',methods=['GET','POST'])
+def js_info():
+    form = Seeker_Info()
+    js_username = getSession()
+    print(js_username)
+    if form.validate_on_submit():
+        js_username = getSession()
+        print("hi")
+        print(js_username)
+        query_str = f"""UPDATE public.\"Job_Seekers\" SET school_name='{form.school_name.data}',
+            tenth_percent='{form.tenth_percent.data}',junior_college_name='{form.junior_college_name.data}',
+            twelfth_percent='{form.twelfth_percent.data}',graduation_college_name='{form.graduation_college_name.data}',
+            graduation_cgpa='{form.graduation_cgpa.data}',graduation_course_name='{form.graduation_course_name.data}',
+            graduation_year_of_passing='{form.graduation_year_of_passing.data}',
+            about_yourself='{form.about_yourself.data}',hobbies='{form.hobbies.data}'  WHERE username='{js_username}'"""
+        
+        try:
+            cur.execute(query_str)
+            conn.commit()
+            # print(session['username'])
+        except(Exception, psycopg2.DatabaseError) as error:
+            print(error)
+            return render_template('user_info.html',form=form)
+
+        if form.post_graduation_yes_no.data=='Y':
+            print('heree')
+            query_str = f"""UPDATE public.\"Job_Seekers\" SET graduation_college_name='{form.post_graduation_college_name.data}',
+            post_graduation_cgpa='{form.post_graduation_cgpa.data}',post_graduation_course_name='{form.post_graduation_course_name.data}',
+            post_graduation_year_of_passing='{form.post_graduation_year_of_passing.data}' WHERE username='{js_username}'"""
+ 
+            try:
+                cur.execute(query_str)
+                conn.commit()
+                print("exectuted!")
+                # print(session['username'])
+            except(Exception, psycopg2.DatabaseError) as error:
+                print(error)
+                return render_template('user_info.html',form=form)
+        return redirect(url_for('home'))
+    print(form.errors)
+    return render_template('user_info.html',form=form)
+>>>>>>> ad4311b328fdb776088b960b3f2e2cade4d436ae
+
+@app.route('/AddJob')
+def add_jobs():
+    form = add_jobs()
+    form.validate_on_submit():
+        query_str = f"INSERT INTO JOBS() VALUES ();"
+        try:
+            cur.execute(query_str)
+            conn.commit()
+            print("inserted!")
+            # print(session['username'])
+        except(Exception, psycopg2.DatabaseError) as error:
+            print(error)
+    return render_template('AddJobs.html',form=form)

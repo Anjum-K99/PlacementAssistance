@@ -12,6 +12,7 @@
 {% endblock cust_stylesheet%}
 
 {% block optional_main_nav %}
+
 <!-- main content here -->
 <!--Main Navbar-->
 <header class="container-fluid">
@@ -31,36 +32,43 @@
             <a class="btn btn-sm nav-btn mr-2" name="Logout" href="{# url_for('logout') #}">Logout</a>
           </div>
         {# else #} -->
+        {% if 'username' in session %}
+        <div class="navbar-nav ml-auto"></div>
+          <div class="nav-ip mr-2">Welcome, {{session.username}}</div>
+          <a class="btn btn-sm nav-btn mr-2" href="logout">Logout</a>
+        </div>
+        {% else %}
           <form class="form-inline navbar-nav ml-auto" method="POST" action="">
             {{ form.hidden_tag() }}
             <a class="btn btn-sm nav-btn mr-2" name="Contact us" href="{# url_for('contact') #}">Contact Us</a>
             <!-- <input type='text' name='uname' placeholder="Username" class="form-control form-control-sm nav-ip mr-2"> -->
-            {{ form.username(class="form-control form-control-sm nav-ip mr-2",placeholder="Username") }}
+           
             <!-- <input type='password' name='pwd' placeholder="Password" class="form-control form-control-sm nav-ip mr-3"> -->
             {% if form.username.errors %}
-              {{ form.username(class="form-control form-control-lg is-invalid") }}
+              {{ form.username(class="form-control form-control-sm is-invalid") }}
               <div class="invalid-feedback">
-                {% for error in form.username.errors %}
-                  <span>{{ error }}</span>
-                {% endfor %}
+                  {% for error in form.username.errors %}
+                      <span>{{ error }}</span>
+                  {% endfor %}
               </div>
+            {% else %}
+                {{ form.username(class="form-control form-control-sm nav-ip mr-2",placeholder="Username") }}
             {% endif %}
 
-            {{ form.password(class="form-control form-control-sm nav-ip mr-2",placeholder='Password') }}
             {% if form.password.errors %}
-              {{ form.password(class="form-control form-control-lg is-invalid") }}
+              {{ form.password(class="form-control orm-control-sm is-invalid") }}
               <div class="invalid-feedback">
-                {% for error in form.password.errors %}
-                  <span>{{ error }}</span>
-                {% endfor %}
+                  {% for error in form.password.errors %}
+                      <span>{{ error }}</span>
+                  {% endfor %}
               </div>
+            {% else %}
+                {{ form.password(class="form-control form-control-sm nav-ip mr-2",placeholder='Password') }}
             {% endif %}
             <!-- <button class="btn btn-light btn-sm nav-btn mr-2" name="login">Log In </button> -->
             {{ form.login(class="btn btn-sm nav-btn mr-2") }}
-            <!-- <button class="btn btn-light btn-sm nav-btn" name="login">Register!</button> -->
-            {{ form.register(class="btn btn-sm nav-btn") }}
           </form>
-        {# endif #}
+        {% endif %}
       </div>
     </div>
   </nav>
@@ -80,7 +88,7 @@
     </div>
     <hr style="width:50%">
     <div class="row justify-content-center mt-4">
-      <a class="col-sm-2 register-as m-3 p-3 text-center" href="#">
+      <a class="col-sm-2 register-as m-3 p-3 text-center" href="jsSignUp">
         <i class="fas fa-graduation-cap display-3"></i>
         <p>Register as Job Seeker</p>
       </a>

@@ -143,8 +143,62 @@
                     </div>
                     <!-- POST_GRAD INFO -->
                     <div id="post_grad" style="display:none;">
-                        <label for='blabla'>Thanks</label>
-                        <input type="text" name="blabla" id = "blabla">
+                        <div class="form-group">
+                            {{ form.post_graduation_college_name.label(class="form-control-label") }}
+    
+                            {% if form.post_graduation_college_name.errors %}
+                                {{ form.post_graduation_college_name(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.post_graduation_college_name.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.post_graduation_college_name(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            {{ form.post_graduation_cgpa.label(class="form-control-label") }}
+    
+                            {% if form.post_graduation_cgpa.errors %}
+                                {{ form.post_graduation_cgpa(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.post_graduation_cgpa.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.post_graduation_cgpa(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            {{ form.post_graduation_course_name.label(class="form-control-label") }}
+    
+                            {% if form.post_graduation_course_name.errors %}
+                                {{ form.post_graduation_course_name(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.post_graduation_course_name.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.post_graduation_course_name(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            {{ form.post_graduation_year_of_passing.label(class="form-control-label") }}
+    
+                            {% if form.post_graduation_year_of_passing.errors %}
+                                {{ form.post_graduation_year_of_passing(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.post_graduation_year_of_passing.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.graduation_year_of_passing(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
                     </div>
                     <div class="form-group">
                         {{ form.about_yourself.label(class="form-control-label") }}
@@ -174,25 +228,21 @@
                             {{ form.hobbies(class="form-control form-control-lg") }}
                         {% endif %}
                     </div>
-                    <div class="form-group">
-                            <select class="selectpicker" multiple data-live-search="true">
-                                    <option>Mustard</option>
-                                    <option>Ketchup</option>
-                                    <option>Relish</option>
-                                  </select>
-                        <!-- {{ form.skills.label(class="form-control-label") }}
-
-                        {% if form.skills.errors %}
-                            {{ form.skills(class="form-control form-control-lg is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for error in form.skills.errors %}
-                                    <span>{{ error }}</span>
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form.skills(class="form-control form-control-lg",size=1) }}
-                        {% endif %} -->
-                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                      
+                          <select id="sel" class="mdb-select colorful-select dropdown-primary md-form" multiple searchable="Search here.." onclick="opt()">
+                            
+                            <option value="1">USA</option>
+                            <option value="2">Germany</option>
+                            <option value="3">France</option>
+                            <option value="4">Poland</option>
+                            <option value="5">Japan</option>
+                          </select>
+                      
+                        </div>
+                      </div>
+                      
                     <div class="form-group">
                         {{ form.submit(class="btn btn-info")}}
                     </div>
@@ -216,6 +266,14 @@
             document.getElementById('post_grad').style.display = 'none';
             // document.getElementById('yes').checked = false;
         }
+    }
+    function opt(){
+        var e = document.getElementById("sel");
+        console.log(e);
+        var a =e.options[e.selectedIndex].text;
+        console.log(a)
+        var b = e.selectedOptions
+        console.log(b)
     }
 </script>  
 {% endblock cust_scripts %}

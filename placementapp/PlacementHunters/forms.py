@@ -59,20 +59,19 @@ class Seeker_Info(FlaskForm):
 
     post_graduation_yes_no =  RadioField('Add Post Graduation?', choices=[('Y','Yes'),('N','No')],validators=[DataRequired()])
     post_graduation_college_name = StringField('College/University Name')
-    post_graduation_cgpa = DecimalField('CGPA')
+    post_graduation_cgpa = StringField('CGPA')
     post_graduation_course_name = StringField('Course Name')
     post_graduation_year_of_passing = StringField('Year Of Passing')
 
     about_yourself = TextAreaField('About Yourself / Introduction', validators=[DataRequired()])
     hobbies = TextAreaField('Your hobbies', validators=[DataRequired()])
-    skills = SelectMultipleField('Your Skills',choices=[('cpp', 'C++'), ('py', 'Python'), ('text', 'Plain Text')], validators=[DataRequired()])
+    # skills = SelectMultipleField('Your Skills',choices=[('cpp', 'C++'), ('py', 'Python'), ('text', 'Plain Text')], validators=[DataRequired()])
     submit = SubmitField('Submit')
 
 class Home_form(FlaskForm):
     username = StringField('Username',validators=[DataRequired(),Length(min=2,max=50)])
     password = PasswordField('Password',validators=[DataRequired()])
     login = SubmitField('Login')
-    register = SubmitField('Register')
     # Your form's submit button's data value will be True if it was pressed. See very simple example below of a form with two submit buttons and a single input field.
 
 # class Companies(FalskForm):
@@ -93,5 +92,13 @@ class Company_reg(FlaskForm):
         if (x not in allowed):
             raise ValidationError('Incorrect website format try agin. Allowed extensions include: .com, .in, .co, .org')
         
+class add_jobs(FlaskForm):
+    name = StringField('Job Name',validators=[DataRequired()])
+    descrip = StringField('Job description',validators=[DataRequired()])
+    package = IntegerField('Job package',validators=[DataRequired()])
+    comapny_id = StringField('Enter your GSTIN number',validators=[DataRequired(),Length(min=15,max=15)])#would be perfect to get this from session variable
+    num_of_openings = IntegerField('Job package',validators=[DataRequired(),NumberRange(min=0,max=100,message="Enter valid number")])
+    submit = SubmitField('Post Job')
+
 
 
