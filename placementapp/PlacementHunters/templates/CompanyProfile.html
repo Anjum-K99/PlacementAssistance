@@ -6,12 +6,14 @@
 {% block content %}
 
 <div class="container">
-  {# company #}<!--comes here as a tuple-->
+  {# company #}
+  <!--comes here as a tuple-->
 
   <div class="row pt-5">
 
     <div class="col-md-4">
-      <div class="text-center"><!--for profile picture-->
+      <div class="text-center">
+        <!--for profile picture-->
         <img src="https://via.placeholder.com/350x400">
         <p class="display-4">{{ company[1] }}</p>
         <p>
@@ -60,21 +62,26 @@
           <div class="bot-border"></div>
         </div>
         <hr>
-          <div class="form-group">
+        <div class="form-group">
           <div class="col-sm-5 col-xs-6 tital ">Website:</div>
-          <a class="col-sm-7 editable" href ='{{ company[6] }}' style="display:block">{{ company[6] }}</a>
+          <a class="col-sm-7 editable" href='{{ company[6] }}' style="display:block">{{ company[6] }}</a>
           <input class="col-sm-7 col-xs-6 form-control to-show" style="display:none" placeholder=""></input>
           <div class="clearfix"></div>
           <div class="bot-border"></div>
         </div>
 
-        <div class="col-sm-5 col-xs-6 tital pt-5 edit-info"><button class="btn btn-success" onclick="edit_dets()">Edit Info</button></div>
-        <div class="col-sm-5 col-xs-6 tital pt-5 submit-info" style = "display:none"><button class="btn btn-success" onhover="submit_data()">Submit</button></div>
+        <div class="col-sm-5 col-xs-6 tital pt-5 edit-info"><button class="btn btn-success" onclick="edit_dets()">Edit
+            Info</button></div>
+        <div class="col-sm-5 col-xs-6 tital pt-5 submit-info" style="display:none"><button class="btn btn-success"
+            onhover="submit_data()">Submit</button></div>
 
-    </form>
-    
+      </form>
+
     </div>
 
+  </div>
+  <div class="row" id="job-cards">
+    <!--this is the cardss-->
   </div>
 </div>
 
@@ -96,41 +103,77 @@
   // }
   // comapny_profile_info({{ company| safe }})
 
-  function edit_dets(){
+  function edit_dets() {
     var sub_button = document.getElementsByClassName('submit-info');
-    sub_button[0].style.display='block';
+    sub_button[0].style.display = 'block';
     // var edit_button = document.getElementsByClassName('edit-info');
     // edit_button[0].style.display='none';
 
     oldText = [];
 
     var elements = document.getElementsByClassName('editable');
-    for(i=0;i<elements.length;i++){
+    for (i = 0; i < elements.length; i++) {
       // elements[i].classList.add('form-control');
       oldText.push(elements[i].innerHTML);
       elements[i].style.display = 'none';
     }
     var inputBox = document.getElementsByClassName('to-show');
     console.log(inputBox);
-    for(i=0;i<inputBox.length;i++){
+    for (i = 0; i < inputBox.length; i++) {
       // elements[i].classList.add('form-control');
       inputBox[i].style.display = 'block';
       inputBox[i].placeholder = oldText[i];
     }
   }
 
-//   function submit_data(){
-//     type: "GET",
-//     url: "{{ url_for("company_profile") }}",
-//     contentType: "application/json",
-//     data: JSON.stringify({hello: "world"}),
-//     dataType: "json",
-//     success: function(response) {
-//         console.log(response);
-//     },
-//     error: function(err) {
-//         console.log(err);
-//     }
-//   }
+  //   function submit_data(){
+  //     type: "GET",
+  //     url: "{{ url_for("company_profile") }}",
+  //     contentType: "application/json",
+  //     data: JSON.stringify({hello: "world"}),
+  //     dataType: "json",
+  //     success: function(response) {
+  //         console.log(response);
+  //     },
+  //     error: function(err) {
+  //         console.log(err);
+  //     }
+  //   }
+
+  function display_jobs(jobs) {
+    console.log(jobs);
+    container = document.getElementById('job-cards');
+    content = '';
+    for (i = 0; i < jobs.length; i++) {
+      if(i%3==0) content+=`<div class="row">`;
+      content += `<div class="col-md card card-cascade wider m-3">
+          <!-- Card image -->
+          <div class="view view-cascade overlay">
+            <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/photo6.jpg" alt="Card image cap">
+            <a href="#!">
+              <div class="mask rgba-white-slight"></div>
+            </a>
+          </div>
+
+          <!-- Card content -->
+          <div class="card-body card-body-cascade text-center">
+            <!-- Title -->
+            <h4 class="card-title"><strong>${jobs[i][6]}</strong></h4>
+            <!-- Subtitle -->
+            <h5 class="blue-text pb-2"><strong>Package:${jobs[i][1]}</strong></h5>
+            <h5 class="blue-text pb-2"><strong>Number of openings:${jobs[i][2]}</strong></h5>
+            <h5 class="blue-text pb-2"><strong>Location:${jobs[i][4]}</strong></h5>
+            <!-- Text -->
+            <p class="card-text">${jobs[i][0]}</p>
+            <button class="btn purchase-btn"><a href="jobappninfo/${jobs[i][3]}">Job Details</a></button>
+          </div>
+        </div>
+        `
+        if(i%3==2) content+=`</div>`;
+    }
+    container.innerHTML += content;
+
+  }
+  display_jobs({{ jobs| safe }})
 </script>
 {% endblock %}

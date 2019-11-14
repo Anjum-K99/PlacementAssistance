@@ -82,6 +82,24 @@
         </div>
 
         <div class="form-group">
+            <!--address-->
+            {{ form.address.label(class = "fom-control-label") }}
+    
+            {% if form.address.errors %}
+            {{ form.address(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+              <!--ony show this div on errors-->
+              {% for error in form.address.errors %}
+              <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+            {% else %}
+            {{ form.address(class="form-control form-control-lg") }}
+            <!--normal input field-->
+            {% endif %}
+          </div>
+
+        <div class="form-group">
             {{ form.submit(class="btn btn-info")}}
         </div>
 
