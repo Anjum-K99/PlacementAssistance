@@ -1,27 +1,26 @@
 {% extends 'layout.html' %}
 
 {% block cust_stylesheet %}
+<link rel="stylesheet" href="../static/company_profile.css">
 {% endblock %}
+
+{% block navbar1 %}
+{% include 'navbar1.html' %}
+{% endblock navbar1 %}
 
 {% block content %}
 
-<div class="container">
-  {# company #}
+<div class="container pt-5">
   <!--comes here as a tuple-->
 
   <div class="row pt-5">
 
     <div class="col-md-4">
-      <div class="text-center">
-        <!--for profile picture-->
-        <img src="https://via.placeholder.com/350x400">
+      <div class="row picture">
+
+      </div>
+      <div class="row">
         <p class="display-4">{{ company[1] }}</p>
-        <p>
-          <a class="btn btn-primary btn-s" href="#" role="button">Facebook</a>
-          <a class="btn btn-primary btn-s" href="#" role="button">Twitter</a>
-          <a class="btn btn-primary btn-s" href="#" role="button">Instagram</a>
-          <a class="btn btn-primary btn-s" href="#" role="button">Website</a>
-        </p>
       </div>
     </div>
 
@@ -40,7 +39,7 @@
         <hr>
         <div class="form-group">
           <div class="col-sm-5 col-xs-6 tital ">GSTIN:</div>
-          <div class="col-sm-7 editable" style="display:block">{{ company[0] }}</div>
+          <div class="col-sm-7 editable " style="display:block">{{ company[0] }}</div>
           <input class="col-sm-7 col-xs-6 form-control to-show" style="display:none" placeholder=""></input>
           <div class="clearfix"></div>
           <div class="bot-border"></div>
@@ -70,9 +69,9 @@
           <div class="bot-border"></div>
         </div>
 
-        <div class="col-sm-5 col-xs-6 tital pt-5 edit-info"><button class="btn btn-success" onclick="edit_dets()">Edit
+        <div class="col-sm-5 col-xs-6 tital pt-5 edit-info"><button class="btn my-btn" onclick="edit_dets()">Edit
             Info</button></div>
-        <div class="col-sm-5 col-xs-6 tital pt-5 submit-info" style="display:none"><button class="btn btn-success"
+        <div class="col-sm-5 col-xs-6 tital pt-5 submit-info" style="display:none"><button class="btn my-btn"
             onhover="submit_data()">Submit</button></div>
 
       </form>
@@ -80,7 +79,10 @@
     </div>
 
   </div>
+  <hr style="width:95%">
+  <hr style="width:95%">
   <div class="row" id="job-cards">
+    <h3>Your posted jobs include...</h3>
     <!--this is the cardss-->
   </div>
 </div>
@@ -145,7 +147,7 @@
     container = document.getElementById('job-cards');
     content = '';
     for (i = 0; i < jobs.length; i++) {
-      if(i%3==0) content+=`<div class="row">`;
+      if (i % 3 == 0) content += `<div class="row">`;
       content += `<div class="col-md card card-cascade wider m-3">
           <!-- Card image -->
           <div class="view view-cascade overlay">
@@ -169,7 +171,7 @@
           </div>
         </div>
         `
-        if(i%3==2) content+=`</div>`;
+      if (i % 3 == 2) content += `</div>`;
     }
     container.innerHTML += content;
 

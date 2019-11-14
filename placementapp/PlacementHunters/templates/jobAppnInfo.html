@@ -3,59 +3,61 @@
 {% block cust_stylesheet %}
 {% endblock %}
 
+{% block navbar1 %}
+{% include 'navbar1.html' %}
+{% endblock navbar1 %}
+
+
 {% block content %}
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-3 fixed-top bg-dark">
-        <!--the filter options sidebar will go here-->
-      </div>
-      <div class="col-md">
-        <div class="container" id="displayseekers">
-        </div>
-      </div>
+<div class="container-fluid">
+  <div class="container">
+    <div class="row mt-5" id="displayseekers">
+
     </div>
   </div>
+</div>
 {% endblock content %}
 
 {% block cust_scripts %}
-  <script>
-    function test_func(seekers,allskills) {
-        const container = document.getElementById('displayseekers');
-        console.log(seekers);
-        console.log(allskills)
-        for(i=0;i<seekers.length;i++){
-            console.log(i);
-            container.innerHTML+=`<div class="row">
-                <div class="col-md card card-cascade wider m-3">
-                <h3>Name: ${seekers[i][2]}. ${seekers[i][3]}. ${seekers[i][4]}</h3>
-                <h3>Gender: ${seekers[i][6]}</h3>
-                <h3>Contact: ${seekers[i][7]}</h3>
-                <h3>Email: ${seekers[i][8]}</h3>
-                <h3>About: ${seekers[i][22]}</h3>
-                <h3>Hobbies: ${seekers[i][23]}</h3>
-                <h3>School: ${seekers[i][10]}</h3>
-                <h3>10th Percentage: ${seekers[i][11]}</h3>
-                <h3>Junior College: ${seekers[i][12]}</h3>
-                <h3>12th Percentage: ${seekers[i][13]}</h3>
-                <h3>Graduation details</h3>
-                <h3>College: ${seekers[i][14]}</h3>
-                <h3>Course: ${seekers[i][16]}</h3>
-                <h3>CGPA: ${seekers[i][15]}</h3>
-                <h3>Year Of Passing: ${seekers[i][17]}</h3>
-                <h3>Post Graduation details</h3>
-                <h3>College: ${seekers[i][18]}</h3>
-                <h3>Course: ${seekers[i][20]}</h3>
-                <h3>CGPA: ${seekers[i][19]}</h3>
-                <h3>Year Of Passing: ${seekers[i][21]}</h3>
-                <h3>skills:</h3>`;
-                for(j=0;j<allskills[i].length;j++){
-                    container.innerHTML+=`${allskills[i][j]},`;
-                }
-                container.innerHTML+=`</div>
-                </div>`;
+<script>
+  function test_func(seekers, allskills) {
+    const container = document.getElementById('displayseekers');
+    console.log(seekers);
+    console.log(allskills);
+    for (i = 0; i < seekers.length; i++) {
+      if (i % 3 == 0) container.innerHTML += `<div class="row">`;
+      console.log(i);
+      container.innerHTML += `
+        <div class="col-md card card-cascade wider m-3">
+        <p>Name: ${seekers[i][2]}. ${seekers[i][3]}. ${seekers[i][4]}</p>
+        <p>Gender: ${seekers[i][6]}</p>
+        <p>Contact: ${seekers[i][7]}</p>
+        <p>Email: ${seekers[i][8]}</p>
+        <p>About: ${seekers[i][22]}</p>
+        <p>Hobbies: ${seekers[i][23]}</p>
+        <p>School: ${seekers[i][10]}</p>
+        <p>10th Percentage: ${seekers[i][11]}</p>
+        <p>Junior College: ${seekers[i][12]}</p>
+        <p>12th Percentage: ${seekers[i][13]}</p>
+        <p>Graduation details</p>
+        <p>College: ${seekers[i][14]}</p>
+        <p>Course: ${seekers[i][16]}</p>
+        <p>CGPA: ${seekers[i][15]}</p>
+        <p>Year Of Passing: ${seekers[i][17]}</p>
+        <p>Post Graduation details</p>
+        <p>College: ${seekers[i][18]}</p>
+        <p>Course: ${seekers[i][20]}</p>
+        <p>CGPA: ${seekers[i][19]}</p>
+        <p>Year Of Passing: ${seekers[i][21]}</p>
+        <p>skills:`;
+        for (j = 0; j < allskills[i].length; j++) {
+          container.innerHTML += `${allskills[i][j]},`;
         }
+    container.innerHTML += `</p></div>`;
+    if (i % 3 == 0) container.innerHTML += `<div class="row">`;
     }
-    test_func({{ seekers| safe }},{{ allskills| safe }})
+  }
+  test_func({{ seekers| safe }}, {{ allskills| safe }})
 
-  </script>
+</script>
 {% endblock cust_scripts %}
