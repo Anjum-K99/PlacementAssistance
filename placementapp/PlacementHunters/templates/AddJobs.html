@@ -1,6 +1,9 @@
 {% extends 'layout.html' %}
 
 {% block cust_stylesheet %}
+<link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+<link rel="stylesheet" href="{{url_for('static', filename='prism.css')}}">
+<link rel="stylesheet" href="{{url_for('static', filename='chosen.css')}}">
 {% endblock %}
 
 {% block content %}
@@ -98,7 +101,15 @@
             <!--normal input field-->
             {% endif %}
           </div>
-
+        <div class="form-group">
+          <div class="form-control-label">Skills Required</div>
+          <select id ="sel" data-placeholder="Skills required...." class="chosen-select" multiple tabindex="4" name="sel" required>
+              <option value=""></option>
+              {% for skill in skills %}
+              <option value="{{ skill }}" >{{ skill }}</option>
+              {%  endfor %}
+          </select>
+        </div>
         <div class="form-group">
             {{ form.submit(class="btn btn-info")}}
         </div>
@@ -110,4 +121,7 @@
 {% endblock content %}
 
 {% block cust_scripts %}
+<script src="{{url_for('static', filename='chosen.jquery.js')}}"></script>
+<script src="{{url_for('static', filename='prism.js')}}"></script>
+<script src="{{url_for('static', filename='init.js')}}"></script>
 {% endblock %}

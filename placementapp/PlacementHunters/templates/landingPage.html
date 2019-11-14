@@ -87,16 +87,20 @@
       <a class="btn learn-more" href="#pricing">Our Prices</a>
     </div>
     <hr style="width:50%">
-    <div class="row justify-content-center mt-4">
-      <a class="col-sm-2 register-as m-3 p-3 text-center" href="jsSignUp">
-        <i class="fas fa-graduation-cap display-3"></i>
-        <p>Register as Job Seeker</p>
-      </a>
-      <a class="col-sm-2 register-as m-3 p-3 text-center" href="#">
-        <i class="fas fa-briefcase display-3"></i>
-        <p>Register as Company</p>
-      </a>
-    </div>
+    {% if 'username' in session %}
+      <div class="row justify-content-center mt-4"></div>
+    {% else %}
+      <div class="row justify-content-center mt-4">
+        <a class="col-sm-2 register-as m-3 p-3 text-center" href="jsSignUp">
+          <i class="fas fa-graduation-cap display-3"></i>
+          <p>Register as Job Seeker</p>
+        </a>
+        <a class="col-sm-2 register-as m-3 p-3 text-center" href="CompanyReg">
+          <i class="fas fa-briefcase display-3"></i>
+          <p>Register as Company</p>
+        </a>
+      </div>
+    {% endif %}
     <div class="row" style="height:5rem"></div>
   </div>
 </div>

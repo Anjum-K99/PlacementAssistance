@@ -77,7 +77,7 @@ class Home_form(FlaskForm):
 # class Companies(FalskForm):
 
 class Company_reg(FlaskForm):
-    GSTIN = StringField('GSTIN Number',validators=[DataRequired(),Length(min=15,max=15)])
+    GSTIN = IntegerField('GSTIN Number',validators=[DataRequired()])
     name = StringField('Enter name of comapny')
     username = StringField('Username',validators=[DataRequired(),Length(min=2,max=20)])
     website = StringField('Enter comapny website',validators=[DataRequired()])

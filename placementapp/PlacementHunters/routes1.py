@@ -20,10 +20,33 @@ def home():
         q1 = f"SELECT password FROM public.\"Job_Seekers\" WHERE username='{form.username.data}'"
         cur.execute(q1)
         pw = cur.fetchone()
-        if pw[0] is "null":
-            error='Username is incorrect'
-            form.username.errors.append(error)
-            return render_template("landingPage.html", title="Home",form=form,session=session)
+        print(pw)
+        if pw is None:
+            q1 = f"SELECT password FROM public.\"Comapny\" WHERE username='{form.username.data}'"
+            cur.execute(q1)
+            pw2 = cur.fetchone()
+            print(pw2)
+            if pw2 is None:
+                error='Username is incorrect'
+                form.username.errors.append(error)
+                return render_template("landingPage.html", title="Home",form=form,session=session)
+            else:
+                print(pw2[0])
+                print(form.password.data)
+                session['username']=form.username.data
+                # if pw2[0]==form.password.data:
+                #     print("hi")
+                #     session['username']=form.username.data
+                #     form.username.data=""
+                #     form.password.data=""
+                #     #flash(f'You were successfully logged in','success')
+                #     print("LOGGEDIN")
+                #     return render_template("landingPage.html",title="Home",form=form,session=session)
+                # else:
+                #     error='Password is incorrect'
+                #     form.username.errors.append(error)
+                #     form.password.data=""
+                return render_template("landingPage.html", title="Home",form=form,session=session)
         else:
             if pw[0]==form.password.data:
                 session['username']=form.username.data
@@ -108,30 +131,45 @@ def recommendation():
     return [],jobs
 
 
-@app.route('/JobPage')
-def Jobs():
+@app.route('/JobPage/<string:x>')
+def Jobs(x):
+    print('HI')
+    print(x)
+    xval=x
+    print(json.dumps(xval))
     percent,jobs = recommendation()
     print(percent)
     print(jobs)
     #percent is list of tuples and 
     #jobs is also list of tuples. 
-    return render_template("jobBrowsing.html",percent = json.dumps(percent), jobs = json.dumps(jobs))
+    return render_template("jobBrowsing.html",percent = json.dumps(percent), jobs = json.dumps(jobs),x=xval)
 
 @app.route('/CompanyReg',methods=['GET','POST'])
 def Company_registration():
     form = Company_reg()
     if form.validate_on_submit():
         print("company form valid")
-        try:#**
-            query_str = f"INSERT INTO public.\"Comapny\"(\"GSTIN\",name, username, mobile, address, password, website) VALUES ({int(form.GSTIN.data)}, '{form.name.data}', '{form.username.data}', '{form.mobile.data}', '{form.address.data}',' {form.password.data}', '{form.website.data}')"
-            cur.execute(query_str)
-            conn.commit()
-            count = cur.rowcount
-            print (count, "Record inserted successfully into company table")
-        except (Exception, psycopg2.Error) as error :
-            if(conn):
-                print("Failed to insert record into company table", error)
-        return redirect(url_for('comapy_profile'))#go for further information
+        q1 = f"SELECT \"GSTIN\" FROM public.\"Comapny\" WHERE username='{form.username.data}'"
+        cur.execute(q1)
+        user_name = cur.fetchone()
+        if json.dumps(user_name) is not "null":
+            error='Username already exists'
+            form.username.errors.append(error)
+            return render_template("company_reg.html",form=form)
+        else:
+            try:#**
+                query_str = f"INSERT INTO public.\"Comapny\"(\"GSTIN\",name, username, mobile, address, password, website) VALUES ({form.GSTIN.data}, '{form.name.data}', '{form.username.data}', '{form.mobile.data}', '{form.address.data}',' {form.password.data}', '{form.website.data}')"
+                cur.execute(query_str)
+                conn.commit()
+                count = cur.rowcount
+                print (count, "Record inserted successfully into company table")
+                session['username']=form.username.data
+                return redirect(url_for('company_profile'))#go for further information
+            except (Exception, psycopg2.Error) as error :
+                if(conn):
+                    print("Failed to insert record into company table", error)
+                return render_template("company_reg.html",form = form)
+        
     return render_template("company_reg.html",form = form)
 
 
@@ -149,7 +187,8 @@ def all_Jobs():
 def company_profile():
     #get company id from the table or session variable. 
     # comapny_username = getSession()#** change
-    comapny_username = 'info_ker'
+    comapny_username = getSession()
+    print(comapny_username)
     query_str = f"SELECT \"GSTIN\" FROM public.\"Comapny\" WHERE username = '{comapny_username}';"
     cur.execute(query_str)
     GSTIN = cur.fetchone()[0]
@@ -275,34 +314,59 @@ def js_info():
 @app.route('/AddJob',methods=['GET','POST'])
 def add_jobs():
     print("here again")
+    print(getSession())
     form = add_jobs_form()
+    query_str = f"SELECT name FROM skills"
+    cur.execute(query_str)
+    skills = cur.fetchall()
+    print(type(skills[0]))
+    skills = [item for t in skills for item in t]
+    print("skills",skills)
     if form.validate_on_submit():
         print("add jobs form valid")
         print("here")
+        comapny_username = getSession()
+        print("hi")
+        print(comapny_username)
+        skil = request.form.getlist('sel')
+        
+        
         try:
             # comapny_username = getSession() #gets username of company
-            comapny_username = 'info_ker'#**change
+            #**change
             query_str = f"SELECT \"GSTIN\" FROM public.\"Comapny\" WHERE username = '{comapny_username}';"
             cur.execute(query_str)
             GSTIN = cur.fetchone()
             print(GSTIN)
 
-            query_str = f"INSERT INTO public.\"Jobs\"( description, \"package\", num_of_openings, comapany_id, location,  name) VALUES ('{form.descrip.data}',{form.package.data}, {form.num_of_openings.data}, '{GSTIN[0]}', '{form.address.data}','{form.name.data}');"
+            query_str = f"INSERT INTO public.\"Jobs\"( description, \"package\", num_of_openings, comapany_id, location,  name) VALUES ('{form.descrip.data}',{form.package.data}, {form.num_of_openings.data}, '{GSTIN[0]}', '{form.address.data}','{form.name.data}') returning public.\"Jobs\".*;"
             try:
                 cur.execute(query_str)
                 conn.commit()
+                ax=cur.fetchone()
+                for s in skills:
+                    for j in skil:
+                        if s==j:
+                            q2 = f"SELECT skill_id from skills where name='{j}'"
+                            cur.execute(q2)
+                            a = cur.fetchone()
+                            q3 = f"INSERT INTO public.jobs_skills values({ax[5]},{a[0]})"
+                            cur.execute(q3)
+                            conn.commit()
+                print(ax)
                 print("exectuted!")
                 # print(session['username'])
+                return redirect(url_for('add_jobs'))
             except(Exception, psycopg2.DatabaseError) as error:
                 print(error)
             # print(session['username'])
         except(Exception, psycopg2.DatabaseError) as error:
             print(error)
         redirect(url_for('home'))#** redirect to company
-    return render_template('AddJobs.html',form=form)
+    return render_template('AddJobs.html',form=form,skills=skills)
 
 
-@app.route('/jobinfo/<int:job_id>')
+@app.route('/JobPage/jobinfo/<int:job_id>')
 def job_info(job_id):
     query_str = f"SELECT * FROM public.\"Jobs\" where \"Job_ID\"={job_id}"
     cur.execute(query_str)
@@ -317,13 +381,17 @@ def job_info(job_id):
     applied = [item for t in applies for item in t]
     print(applied)
     q1 = f"SELECT aadhar_number from public.\"Job_Seekers\" where username='{getSession()}'"
-    cur.execute(q1)   
-    an = cur.fetchone()[0] 
-    if an in applied:
-        yes = 1
+    cur.execute(q1) 
+    a=cur.fetchone()
+    if a is not None:  
+        an = cur.fetchone()[0] 
+        if an in applied:
+            yes = 1
+        else:
+            yes = 0
+        print(yes)
     else:
-        yes = 0
-    print(yes)
+        yes=-1
     return render_template('jobInfo.html',job=json.dumps(job),yes=yes) 
 
 @app.route('/jobinfo/<int:job_id>/applied')

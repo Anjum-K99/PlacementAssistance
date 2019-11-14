@@ -26,9 +26,10 @@
         <h3>${job[3]}</h3>
         <h3>${job[4]}</h3>
         {% if yes==0 %}
-        <button><a href="${job[0]}/applied">APPLY</a></button>
-        {% else %}
-        <button><a href="${job[0]}/cancel">Cancel Application?</a></button>
+        <button><a href="${job[5]}/applied">APPLY</a></button>
+        {% endif %}
+        {% if yes==1 %}
+        <button><a href="${job[5]}/cancel">Cancel Application?</a></button>
         {% endif %}
         `;
     }
