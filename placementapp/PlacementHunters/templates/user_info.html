@@ -1,5 +1,11 @@
 {% extends 'layout.html' %}
 
+{% block cust_stylesheet %}
+<link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+<link rel="stylesheet" href="{{url_for('static', filename='prism.css')}}">
+<link rel="stylesheet" href="{{url_for('static', filename='chosen.css')}}">
+  {% endblock %}
+
 {% block content %}
 	<div class="container-fluid" style="background-color:#e6e6e6;">
 		<div class="row">
@@ -231,14 +237,12 @@
                     <div class="row">
                         <div class="col-md-12">
                       
-                          <select id="sel" class="mdb-select colorful-select dropdown-primary md-form" multiple searchable="Search here.." onclick="opt()">
-                            
-                            <option value="1">USA</option>
-                            <option value="2">Germany</option>
-                            <option value="3">France</option>
-                            <option value="4">Poland</option>
-                            <option value="5">Japan</option>
-                          </select>
+                            <select id ="sel" data-placeholder="Choose a Country..." class="chosen-select" multiple tabindex="4" name="sel" required>
+                                <option value=""></option>
+                                {% for skill in skills %}
+                                <option value="{{ skill }}" >{{ skill }}</option>
+                                {%  endfor %}
+                            </select>
                       
                         </div>
                       </div>
@@ -255,6 +259,9 @@
 {% endblock content %}
 
 {% block cust_scripts %}
+<script src="{{url_for('static', filename='chosen.jquery.js')}}"></script>
+<script src="{{url_for('static', filename='prism.js')}}"></script>
+<script src="{{url_for('static', filename='init.js')}}"></script>
 <script type="text/javascript">
     function yesnoCheck(x){
         
@@ -266,14 +273,6 @@
             document.getElementById('post_grad').style.display = 'none';
             // document.getElementById('yes').checked = false;
         }
-    }
-    function opt(){
-        var e = document.getElementById("sel");
-        console.log(e);
-        var a =e.options[e.selectedIndex].text;
-        console.log(a)
-        var b = e.selectedOptions
-        console.log(b)
-    }
+    
 </script>  
 {% endblock cust_scripts %}
