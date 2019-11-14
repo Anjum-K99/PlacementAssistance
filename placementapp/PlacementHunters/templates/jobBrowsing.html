@@ -3,8 +3,14 @@
 {% block cust_stylesheet %}
 {% endblock %}
 
+{% block navbar1 %}
+{% include 'navbar1.html' %}
+{% endblock navbar1 %}
+
+
+
 {% block content %}
-  <div class="container-fluid">
+  <div class="container-fluid mt-5">
     <div class="row">
       <div class="col-md-3 fixed-top bg-dark">
         <!--the filter options sidebar will go here-->
@@ -19,11 +25,9 @@
 
 {% block cust_scripts %}
   <script>
-    function test_func(percent, jobs, x) {
+    function test_func(percent, jobs) {
       console.log(percent);
       console.log(jobs);
-      console.log(x);
-      console.log(window.location.href)
       var y = window.location.href;
       var x = y.substr(30)
       console.log(x)

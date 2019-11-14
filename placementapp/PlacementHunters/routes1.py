@@ -60,7 +60,7 @@ def home():
                 form.username.errors.append(error)
                 form.password.data=""
                 return render_template("landingPage.html", title="Home",form=form,session=session)
-    return render_template("landingPage.html", title="Home",form=form,session=session)
+    return render_template("landingPage.html", title="Home",navform=form,session=session)
 
 @app.route('/logout')
 def logout():
@@ -133,16 +133,15 @@ def recommendation():
 
 @app.route('/JobPage/<string:x>')
 def Jobs(x):
+    form2 = Home_form()
+    percent,jobs=recommendation()
     print('HI')
     print(x)
     xval=x
     print(json.dumps(xval))
-    percent,jobs = recommendation()
-    print(percent)
-    print(jobs)
     #percent is list of tuples and 
     #jobs is also list of tuples. 
-    return render_template("jobBrowsing.html",percent = json.dumps(percent), jobs = json.dumps(jobs),x=xval)
+    return render_template("jobBrowsing.html",percent = json.dumps(percent), jobs = json.dumps(jobs),x=xval,navform = form2)
 
 @app.route('/CompanyReg',methods=['GET','POST'])
 def Company_registration():

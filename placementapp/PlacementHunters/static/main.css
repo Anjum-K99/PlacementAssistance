@@ -36,9 +36,7 @@
     border: 0.1rem solid rgba(35,136,190,1);
 }
 
-.main-nav{
-    color:white;
-}
+
 .learn-more:hover, .nav-btn:hover, .purchase-btn:hover{
     transition : 0.5s;
     /* background-color:pink; */
