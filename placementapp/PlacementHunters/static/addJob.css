@@ -1,0 +1,43 @@
+
+body{
+    background-color: black;
+}
+.main-cont{
+    background-color: rgba(237,237,237);
+    padding:3rem auto;
+    margin:6rem auto;
+}
+.picture2{
+    background-image: url('../static/images/beige-and-black-chair-in-front-of-white-desk-509922.jpg');
+    /* background-color:linear-gradient(166deg, rgba(35,136,190,1) , rgba(42, 110, 85,1)); */
+    /* background-color: rgba(50,50,50,0.5); */
+    /* background-blend-mode:overlay; */
+    background-size: cover;
+    height:100%;
+    width:100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.comp-btn{
+    background-color: rgba(3,91,110);
+    color:white;
+    transition:0.5s;
+
+}
+.comp-btn:hover{
+    background-color: rgb(2, 159, 194);
+    transition:0.5s;
+    color:white;
+}
+
+* {
+    -webkit-border-radius: 0 !important;
+       -moz-border-radius: 0 !important;
+            border-radius: 0 !important;
+  }
+
+  .nav-btn{
+      color:white !important;
+      background-color:rgba(2, 159, 194,0.6) ;
+  }

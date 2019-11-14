@@ -1,0 +1,41 @@
+.main-col{
+    background-color:rgba(240,240,240);
+    padding: 4rem;
+    margin:3rem;
+}
+body{
+    background: rgba(200,200,200);
+    /* background-image: url('../static/images/2164-transparent-color-cubes-abstract-background.jpg'); */
+    /* background-color:linear-gradient(166deg, rgba(35,136,190,1) , rgba(42, 110, 85,1)); */
+    /* background-color: rgba(50,50,50,0.3);
+    background-blend-mode:overlay;
+    background-size: cover;
+    height:80%;
+    width:100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; */
+    
+}
+
+.my-btn{
+    background-color: rgba(3,91,110);
+    color:white;
+    transition:0.5s;
+}
+.my-btn:hover{
+    background-color: rgb(2, 159, 194);
+    transition:0.5s;
+    color:white;
+}
+.my-btn a{
+    text-decoration: inherit;
+    color: inherit;
+    cursor: auto;
+}
+
+* {
+    -webkit-border-radius: 0 !important;
+       -moz-border-radius: 0 !important;
+            border-radius: 0 !important;
+  }

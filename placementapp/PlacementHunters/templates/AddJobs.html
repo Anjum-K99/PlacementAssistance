@@ -4,90 +4,97 @@
 <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
 <link rel="stylesheet" href="{{url_for('static', filename='prism.css')}}">
 <link rel="stylesheet" href="{{url_for('static', filename='chosen.css')}}">
+<link rel="stylesheet" href="{{url_for('static', filename='addJob.css')}}">
 {% endblock %}
 
+{% block navbar1 %}
+{% include 'navbar1.html' %}
+{% endblock navbar1 %}
+
 {% block content %}
-<div class="container-fluid">
-  <div class="container">
-    <form method="POST" action="">
-      {{ form.hidden_tag() }}
+<div class="container-fluid mt-5 mb-5">
+  <div class="container p-5 main-cont">
+    <div class="row">
+      <div class="col-md p-4">
+        <form method="POST" action="">
+          {{ form.hidden_tag() }}
 
-      <div class="form-group">
-        <!--name-->
-        {{ form.name.label(class = "fom-control-label") }}
+          <div class="form-group">
+            <!--name-->
+            {{ form.name.label(class = "fom-control-label") }}
 
-        {% if form.name.errors %}
-        {{ form.name(class="form-control form-control-lg is-invalid") }}
-        <div class="invalid-feedback">
-          <!--ony show this div on errors-->
-          {% for error in form.name.errors %}
-          <span>{{ error }}</span>
-          {% endfor %}
-        </div>
-        {% else %}
-        {{ form.name(class="form-control form-control-lg") }}
-        <!--normal input field-->
-        {% endif %}
-      </div>
-
-      <div class="form-group">
-        <!--descrip-->
-        {{ form.descrip.label(class = "fom-control-label") }}
-
-        {% if form.descrip.errors %}
-        {{ form.descrip(class="form-control form-control-lg is-invalid") }}
-        <div class="invalid-feedback">
-          <!--ony show this div on errors-->
-          {% for error in form.descrip.errors %}
-          <span>{{ error }}</span>
-          {% endfor %}
-        </div>
-        {% else %}
-        {{ form.descrip(class="form-control form-control-lg") }}
-        <!--normal input field-->
-        {% endif %}
-      </div>
-      
-      <div class="form-group">
-        <!--package-->
-        {{ form.package.label(class = "fom-control-label") }}
-
-        {% if form.package.errors %}
-        {{ form.package(class="form-control form-control-lg is-invalid") }}
-        <div class="invalid-feedback">
-          <!--ony show this div on errors-->
-          {% for error in form.package.errors %}
-          <span>{{ error }}</span>
-          {% endfor %}
-        </div>
-        {% else %}
-        {{ form.package(class="form-control form-control-lg") }}
-        <!--normal input field-->
-        {% endif %}
-      </div>
-
-      <div class="form-group">
-          <!--num_of_openings-->
-          {{ form.num_of_openings.label(class = "fom-control-label") }}
-  
-          {% if form.num_of_openings.errors %}
-          {{ form.num_of_openings(class="form-control form-control-lg is-invalid") }}
-          <div class="invalid-feedback">
-            <!--ony show this div on errors-->
-            {% for error in form.num_of_openings.errors %}
-            <span>{{ error }}</span>
-            {% endfor %}
+            {% if form.name.errors %}
+            {{ form.name(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+              <!--ony show this div on errors-->
+              {% for error in form.name.errors %}
+              <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+            {% else %}
+            {{ form.name(class="form-control form-control-lg") }}
+            <!--normal input field-->
+            {% endif %}
           </div>
-          {% else %}
-          {{ form.num_of_openings(class="form-control form-control-lg") }}
-          <!--normal input field-->
-          {% endif %}
-        </div>
 
-        <div class="form-group">
+          <div class="form-group">
+            <!--descrip-->
+            {{ form.descrip.label(class = "fom-control-label") }}
+
+            {% if form.descrip.errors %}
+            {{ form.descrip(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+              <!--ony show this div on errors-->
+              {% for error in form.descrip.errors %}
+              <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+            {% else %}
+            {{ form.descrip(class="form-control form-control-lg") }}
+            <!--normal input field-->
+            {% endif %}
+          </div>
+
+          <div class="form-group">
+            <!--package-->
+            {{ form.package.label(class = "fom-control-label") }}
+
+            {% if form.package.errors %}
+            {{ form.package(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+              <!--ony show this div on errors-->
+              {% for error in form.package.errors %}
+              <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+            {% else %}
+            {{ form.package(class="form-control form-control-lg") }}
+            <!--normal input field-->
+            {% endif %}
+          </div>
+
+          <div class="form-group">
+            <!--num_of_openings-->
+            {{ form.num_of_openings.label(class = "fom-control-label") }}
+
+            {% if form.num_of_openings.errors %}
+            {{ form.num_of_openings(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+              <!--ony show this div on errors-->
+              {% for error in form.num_of_openings.errors %}
+              <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+            {% else %}
+            {{ form.num_of_openings(class="form-control form-control-lg") }}
+            <!--normal input field-->
+            {% endif %}
+          </div>
+
+          <div class="form-group">
             <!--address-->
             {{ form.address.label(class = "fom-control-label") }}
-    
+
             {% if form.address.errors %}
             {{ form.address(class="form-control form-control-lg is-invalid") }}
             <div class="invalid-feedback">
@@ -110,11 +117,16 @@
               {%  endfor %}
           </select>
         </div>
-        <div class="form-group">
-            {{ form.submit(class="btn btn-info")}}
-        </div>
 
-    </form>
+          <div class="form-group">
+            {{ form.submit(class="btn comp-btn")}}
+          </div>
+
+        </form>
+      </div>
+      <div class="col-md picture2" style="height:40rem;">
+      </div>
+    </div>
   </div>
 </div>
 

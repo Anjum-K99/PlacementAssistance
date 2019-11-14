@@ -141,7 +141,7 @@ def Jobs(x):
     print(json.dumps(xval))
     #percent is list of tuples and 
     #jobs is also list of tuples. 
-    return render_template("jobBrowsing.html",percent = json.dumps(percent), jobs = json.dumps(jobs),x=xval,navform = form2)
+    return render_template("jobBrowsing.html",percent = json.dumps(percent), jobs = json.dumps(jobs),navform = form2,x=xval)
 
 @app.route('/CompanyReg',methods=['GET','POST'])
 def Company_registration():
@@ -172,7 +172,7 @@ def Company_registration():
     return render_template("company_reg.html",form = form)
 
 
-@app.route('/allJobsPage')
+@app.route('/allJobsPage')# ** where is the hmtl
 def all_Jobs():
     query_str = f"SELECT * FROM public.\"Jobs\""#list all the possible jobs present on system
     cur.execute(query_str)
@@ -184,6 +184,7 @@ def all_Jobs():
 
 @app.route('/CompanyProfile',methods=['GET','POST'])
 def company_profile():
+    navform = Home_form()
     #get company id from the table or session variable. 
     # comapny_username = getSession()#** change
     comapny_username = getSession()
@@ -206,7 +207,7 @@ def company_profile():
     # data = request.get_json()
     # print(data)
     # print(type(data))
-    return render_template("CompanyProfile.html",company= company, jobs = json.dumps(jobs))
+    return render_template("CompanyProfile.html",company= company, jobs = json.dumps(jobs),navform = navform)
     #return render_template("allJobsPage.html",jobs = json.dumps(jobs))
 
 
@@ -321,6 +322,7 @@ def add_jobs():
     print(type(skills[0]))
     skills = [item for t in skills for item in t]
     print("skills",skills)
+    form2 = Home_form()
     if form.validate_on_submit():
         print("add jobs form valid")
         print("here")
@@ -362,7 +364,7 @@ def add_jobs():
         except(Exception, psycopg2.DatabaseError) as error:
             print(error)
         redirect(url_for('home'))#** redirect to company
-    return render_template('AddJobs.html',form=form,skills=skills)
+    return render_template('AddJobs.html',form=form,navform=form2,skills=skills)
 
 
 @app.route('/JobPage/jobinfo/<int:job_id>')
@@ -422,6 +424,7 @@ def cancel(job_id):
 
 @app.route('/jobappninfo/<int:job_id>')
 def job_application_info(job_id):
+    navform = Home_form()
     q1 = f"SELECT \"Seeker_id\" from public.\"Job_Application\" where job_id={job_id}"
     cur.execute(q1)
     applies = cur.fetchall()
@@ -463,4 +466,4 @@ def job_application_info(job_id):
     print(seekers)
 
 
-    return render_template('jobAppnInfo.html',seekers=json.dumps(seekers),allskills=json.dumps(allskills))
+    return render_template('jobAppnInfo.html',seekers=json.dumps(seekers),allskills=json.dumps(allskills),navform=navform)

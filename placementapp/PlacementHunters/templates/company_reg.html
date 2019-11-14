@@ -6,13 +6,14 @@
 
 {% block content %}
 <div class="container-fluid">
-  <div class="container">
-    <div class="row mt-5 justify-content-center">
-      <p class = "display-4"> 
-        Company Registration<br>
-        <hr style="width:90%">
-      </p>
-      <div class="col-md-5 form-class py-4 mb-4">
+  <div class="container-fluid">
+    <div class="row mt-5 justify-content-left">
+     
+      <div class="col-md-5 form-class py-4 mb-4 p-5" style=" border-style: solid; border-color: rgba(3,91,110);">
+          <p class = "display-4" style="color:rgba(40,40,40)"> 
+              Company Registration<br>
+              <hr style="width:90%" style="color:white">
+            </p>
         <form method="POST" action="">
           {{ form.hidden_tag() }}
 
@@ -143,7 +144,7 @@
           </div>
 
           <div class="form-group">
-            {{ form.submit(class="btn btn-info")}}
+            {{ form.submit(class="btn comp-btn")}}
           </div>
 
         </form>

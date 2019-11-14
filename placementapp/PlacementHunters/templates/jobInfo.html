@@ -1,16 +1,19 @@
 {% extends 'layout.html' %}
 
 {% block cust_stylesheet %}
+<link rel="stylesheet" href="../static/jobInfo.css">
 {% endblock %}
 
+{% block navbar1 %}
+{% include 'navbar1.html' %}
+{% endblock navbar1 %}
+
 {% block content %}
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-3 fixed-top bg-dark">
-        <!--the filter options sidebar will go here-->
-      </div>
-      <div class="col-md">
+  <div class="container-fluid picture1">
+    <div class="row mt-4">
+      <div class="col-md-4 main-col">
         <div class="container" id="displayjob">
+          
         </div>
       </div>
     </div>
@@ -21,10 +24,13 @@
   <script>
     function test_func(job) {
         const container = document.getElementById('displayjob');
-        container.innerHTML += `<h3>${job[1]}</h3>
-        <h3>${job[2]}</h3>
-        <h3>${job[3]}</h3>
-        <h3>${job[4]}</h3>
+        container.innerHTML += `<p class="display-4">${job[6]}</p><!--name-->
+          <p>${job[0]}</p><!--description-->
+          <hr style="width:80%">
+          <p>Package: ${job[1]}</p>
+          <p>Number of openings: ${job[2]}</p>
+          <p>Company GSTIN: ${job[3]}</p>
+          <p>Job location: ${job[4]}</p>
         {% if yes==0 %}
         <button><a href="${job[5]}/applied">APPLY</a></button>
         {% endif %}
