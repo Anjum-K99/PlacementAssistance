@@ -92,5 +92,14 @@ class Company_reg(FlaskForm):
         if (x not in allowed):
             raise ValidationError('Incorrect website format try agin. Allowed extensions include: .com, .in, .co, .org')
         
+class add_jobs_form(FlaskForm):
+    name = StringField('Job Name',validators=[DataRequired()])
+    descrip = StringField('Job description',validators=[DataRequired()])
+    package = IntegerField('Job package',validators=[DataRequired()])
+    # comapny_id = StringField('Enter your GSTIN number',validators=[DataRequired(),Length(min=15,max=15)])#would be perfect to get this from session variable
+    num_of_openings = IntegerField('Enter number of available positions',validators=[DataRequired(),NumberRange(min=0,max=100,message="Enter valid number")])
+    address = StringField('City of job',validators=[DataRequired()])
+    submit = SubmitField('Post Job')
+
 
 

@@ -1,13 +1,12 @@
 from PlacementHunters import app
 from flask import Flask, render_template, redirect, url_for, session, flash, request
 import json
-from PlacementHunters.forms import Home_form, Job_Seeker, Seeker_Info
-from PlacementHunters.forms import Company_reg
+from PlacementHunters.forms import Home_form, Job_Seeker, Seeker_Info, add_jobs_form,Company_reg
 # from PlacementHunters.forms import Job_Seeker, User_Information, Home_form
 
 #for psycopg:
 import psycopg2
-conn = psycopg2.connect("dbname=JobHunters user=postgres password=kjsce")
+conn = psycopg2.connect("dbname=JobHunters2 user=postgres password=FuckYou1804")
 cur = conn.cursor()
 print("connection successful",conn)
 
@@ -123,8 +122,8 @@ def Company_registration():
     form = Company_reg()
     if form.validate_on_submit():
         print("company form valid")
-        try:
-            query_str = f"INSERT INTO public.\"Comapny\"(\"GSTIN\",name, username, mobile, location, password, website) VALUES ({int(form.GSTIN.data)}, '{form.name.data}', '{form.username.data}', '{form.mobile.data}', '{form.address.data}',' {form.password.data}', '{form.website.data}')"
+        try:#**
+            query_str = f"INSERT INTO public.\"Comapny\"(\"GSTIN\",name, username, mobile, address, password, website) VALUES ({int(form.GSTIN.data)}, '{form.name.data}', '{form.username.data}', '{form.mobile.data}', '{form.address.data}',' {form.password.data}', '{form.website.data}')"
             cur.execute(query_str)
             conn.commit()
             count = cur.rowcount
@@ -135,6 +134,42 @@ def Company_registration():
         return redirect(url_for('comapy_profile'))#go for further information
     return render_template("company_reg.html",form = form)
 
+
+@app.route('/allJobsPage')
+def all_Jobs():
+    query_str = f"SELECT * FROM public.\"Jobs\""#list all the possible jobs present on system
+    cur.execute(query_str)
+    jobs = cur.fetchall()
+    print(jobs)
+    return render_template("allJobsPage.html")
+
+   
+
+@app.route('/CompanyProfile',methods=['GET','POST'])
+def company_profile():
+    #get company id from the table or session variable. 
+    # comapny_username = getSession()#** change
+    comapny_username = 'info_ker'
+    query_str = f"SELECT \"GSTIN\" FROM public.\"Comapny\" WHERE username = '{comapny_username}';"
+    cur.execute(query_str)
+    GSTIN = cur.fetchone()[0]
+    print(GSTIN)
+
+    query_str = f"SELECT * FROM public.\"Jobs\" WHERE comapany_id = '{GSTIN}';"
+    cur.execute(query_str)
+    jobs = cur.fetchall()
+
+    query_str = f"SELECT * FROM public.\"Comapny\" WHERE \"GSTIN\" = {GSTIN};"
+    cur.execute(query_str)
+    company = cur.fetchone()#returns a tuple.
+
+    print("comapyfetch",company)
+    print("Job fetch",jobs)
+    # data = request.get_json()
+    # print(data)
+    # print(type(data))
+    return render_template("CompanyProfile.html",company= company, jobs = json.dumps(jobs))
+    #return render_template("allJobsPage.html",jobs = json.dumps(jobs))
 
 
 @app.route('/jsSignUp',methods=['GET','POST'])
@@ -233,7 +268,38 @@ def js_info():
                 return render_template('user_info.html',form=form,skills=skills)
         return redirect(url_for('home'))
     print(form.errors)
-    return render_template('user_info.html',form=form,skills=skills)
+    return render_template('user_info.html',form=form)
+
+
+
+@app.route('/AddJob',methods=['GET','POST'])
+def add_jobs():
+    print("here again")
+    form = add_jobs_form()
+    if form.validate_on_submit():
+        print("add jobs form valid")
+        print("here")
+        try:
+            # comapny_username = getSession() #gets username of company
+            comapny_username = 'info_ker'#**change
+            query_str = f"SELECT \"GSTIN\" FROM public.\"Comapny\" WHERE username = '{comapny_username}';"
+            cur.execute(query_str)
+            GSTIN = cur.fetchone()
+            print(GSTIN)
+
+            query_str = f"INSERT INTO public.\"Jobs\"( description, \"package\", num_of_openings, comapany_id, location,  name) VALUES ('{form.descrip.data}',{form.package.data}, {form.num_of_openings.data}, '{GSTIN[0]}', '{form.address.data}','{form.name.data}');"
+            try:
+                cur.execute(query_str)
+                conn.commit()
+                print("exectuted!")
+                # print(session['username'])
+            except(Exception, psycopg2.DatabaseError) as error:
+                print(error)
+            # print(session['username'])
+        except(Exception, psycopg2.DatabaseError) as error:
+            print(error)
+        redirect(url_for('home'))#** redirect to company
+    return render_template('AddJobs.html',form=form)
 
 
 @app.route('/jobinfo/<int:job_id>')
@@ -258,7 +324,11 @@ def job_info(job_id):
     else:
         yes = 0
     print(yes)
+<<<<<<< HEAD
     return render_template('jobInfo.html',job=json.dumps(job),yes=yes)
+=======
+    return render_template('jobInfo.html',job=json.dumps(job),yes=yes) 
+>>>>>>> refs/remotes/origin/master
 
 @app.route('/jobinfo/<int:job_id>/applied')
 def apply(job_id):
