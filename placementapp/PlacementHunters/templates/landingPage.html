@@ -64,21 +64,21 @@
     <div class="card col-md p-3 m-3">
       <img class="card-img-top" src="..." alt="Card image 1">
       <div class="card-body">
-        <p class="card-text">Quick sample text to create the card title and make up the body of the card's content.
+        <p class="card-text">{{job[0][0]}}
         </p>
       </div>
     </div>
     <div class="card col-md p-3 m-3">
       <img class="card-img-top" src="..." alt="Card image 1">
       <div class="card-body" id="this-one">
-        <p class="card-text">Quick sample text to create the card title and make up the body of the card's content.
+        <p class="card-text">{{job[1][0]}}
         </p>
       </div>
     </div>
     <div class="card col-md p-3 m-3">
       <img class="card-img-top" src="..." alt="Card image 1">
       <div class="card-body">
-        <p class="card-text">Quick sample text to create the card title and make up the body of the card's content.
+        <p class="card-text">{{job[2][0]}}
         </p>
       </div>
     </div>
@@ -111,13 +111,12 @@
       <!-- Card content -->
       <div class="card-body card-body-cascade text-center">
         <!-- Title -->
-        <h4 class="card-title"><strong>Bronze Pack</strong></h4>
+        <h4 class="card-title"><strong>{{companies[0][1]}}</strong></h4>
         <!-- Subtitle -->
-        <h5 class="blue-text pb-2"><strong>Rs 499</strong></h5>
+        <h5 class="blue-text pb-2"><strong>{{companies[0][2]}}</strong></h5>
         <!-- Text -->
-        <p class="card-text">Sed ut perspiciatis unde omnis iste natus sit voluptatem accusantium doloremque
-          laudantium, totam rem aperiam. </p>
-        <button class="btn purchase-btn">Purchase Now!</button>
+        <p class="card-text">{{companies[0][6] }}</p>
+        <button class="btn purchase-btn">{{companies[0][4]}}</button>
       </div>
     </div>
 
@@ -132,13 +131,12 @@
       <!-- Card content -->
       <div class="card-body card-body-cascade text-center">
         <!-- Title -->
-        <h4 class="card-title"><strong>Silver Pack</strong></h4>
+        <h4 class="card-title"><strong>{{companies[1][1]}}</strong></h4>
         <!-- Subtitle -->
-        <h5 class="blue-text pb-2"><strong>Price</strong></h5>
+        <h5 class="blue-text pb-2"><strong>{{companies[1][2]}}</strong></h5>
         <!-- Text -->
-        <p class="card-text">Sed ut perspiciatis unde omnis iste natus sit voluptatem accusantium doloremque
-          laudantium, totam rem aperiam. </p>
-        <button class="btn purchase-btn">Purchase Now!</button>
+        <p class="card-text">{{companies[1][6] }} </p>
+        <button class="btn purchase-btn">{{companies[1][4]}}</button>
       </div>
     </div>
 
@@ -153,13 +151,12 @@
       <!-- Card content -->
       <div class="card-body card-body-cascade text-center">
         <!-- Title -->
-        <h4 class="card-title"><strong>Platinum Pack</strong></h4>
+        <h4 class="card-title"><strong>{{companies[2][1]}}</strong></h4>
         <!-- Subtitle -->
-        <h5 class="blue-text pb-2"><strong>Price</strong></h5>
+        <h5 class="blue-text pb-2"><strong>{{companies[2][2]}}</strong></h5>
         <!-- Text -->
-        <p class="card-text">Sed ut perspiciatis unde omnis iste natus sit voluptatem accusantium doloremque
-          laudantium, totam rem aperiam. </p>
-        <button class="btn purchase-btn">Purchase Now!</button>
+        <p class="card-text">{{companies[2][6] }} </p>
+        <button class="btn purchase-btn">{{companies[2][4]}}</button>
       </div>
     </div>
   </div>

@@ -7,7 +7,14 @@
 {% include 'navbar1.html' %}
 {% endblock navbar1 %}
 
+{% block optional_main_nav %}
+<div><br><br>
+</div>
+{% endblock optional_main_nav %}
 
+{% block navbar2 %}
+{% include 'navbar2.html' %}
+{% endblock navbar2 %}
 
 {% block content %}
   <div class="container-fluid mt-5">

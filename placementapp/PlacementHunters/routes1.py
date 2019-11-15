@@ -15,7 +15,20 @@ print("connection successful",conn)
 def home():
     form = Home_form() #insatnce of form
     print("main route")
-
+    query_str = f"SELECT * FROM public.\"Comapny\""#list all the possible jobs present on system
+    cur.execute(query_str)
+    company = cur.fetchall()
+    print(company)
+    companies=[]
+    for j in range(3):
+        companies.append(company[j])
+    query_str = f"SELECT * FROM public.\"Jobs\""#list all the possible jobs present on system
+    cur.execute(query_str)
+    jobs = cur.fetchall()
+    job = []
+    for j in range(3):
+        job.append(jobs[j])
+    print(companies)
     if form.validate_on_submit():
         q1 = f"SELECT password FROM public.\"Job_Seekers\" WHERE username='{form.username.data}'"
         cur.execute(q1)
@@ -46,7 +59,7 @@ def home():
                 #     error='Password is incorrect'
                 #     form.username.errors.append(error)
                 #     form.password.data=""
-                return render_template("landingPage.html", title="Home",form=form,session=session)
+                return render_template("landingPage.html", title="Home",form=form,session=session,companies=companies,job=job)
         else:
             if pw[0]==form.password.data:
                 session['username']=form.username.data
@@ -54,13 +67,13 @@ def home():
                 form.password.data=""
                 #flash(f'You were successfully logged in','success')
                 print("LOGGEDIN")
-                return render_template("landingPage.html",title="Home",form=form,session=session)
+                return render_template("landingPage.html",title="Home",form=form,session=session,companies=companies,job=job)
             else:
                 error='Password is incorrect'
                 form.username.errors.append(error)
                 form.password.data=""
-                return render_template("landingPage.html", title="Home",form=form,session=session)
-    return render_template("landingPage.html", title="Home",navform=form,session=session)
+                return render_template("landingPage.html", title="Home",form=form,session=session,companies=companies,job=job)
+    return render_template("landingPage.html", title="Home",navform=form,session=session,companies=companies,job=job)
 
 @app.route('/logout')
 def logout():
@@ -246,7 +259,7 @@ def getSession():
 def js_info():
     form = Seeker_Info()
 
-    query_str = f"SELECT name FROM skills"
+    query_str = f"SELECT name FROM public.skills"
     cur.execute(query_str)
     skills = cur.fetchall()
     print(type(skills[0]))
@@ -307,7 +320,7 @@ def js_info():
                 return render_template('user_info.html',form=form,skills=skills)
         return redirect(url_for('home'))
     print(form.errors)
-    return render_template('user_info.html',form=form)
+    return render_template('user_info.html',form=form,skills=skills)
 
 
 
@@ -385,7 +398,7 @@ def job_info(job_id):
     cur.execute(q1) 
     a=cur.fetchone()
     if a is not None:  
-        an = cur.fetchone()[0] 
+        an = a[0] 
         if an in applied:
             yes = 1
         else:
@@ -395,7 +408,7 @@ def job_info(job_id):
         yes=-1
     return render_template('jobInfo.html',job=json.dumps(job),yes=yes) 
 
-@app.route('/jobinfo/<int:job_id>/applied')
+@app.route('/JobPage/jobinfo/<int:job_id>/applied')
 def apply(job_id):
     js_username = getSession()
     print("hi")
@@ -408,7 +421,7 @@ def apply(job_id):
     conn.commit()
     return redirect(url_for('job_info',job_id=job_id))
 
-@app.route('/jobinfo/<int:job_id>/cancel')
+@app.route('/JobPage/jobinfo/<int:job_id>/cancel')
 def cancel(job_id):
     js_username = getSession()
     print("hi")

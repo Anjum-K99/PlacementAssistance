@@ -19,7 +19,8 @@
           {# else #} -->
           {% if 'username' in session %}
           <div class="navbar-nav ml-auto"></div>
-            <div class="nav-ip mr-2">Welcome, {{session.username}}</div>
+            <div class="nav-ip mr-2" style="color :black;">Welcome, {{session.username}}</div>
+            <a class="btn btn-sm nav-btn mr-2" href="/CompanyProfile">Profile</a>
             <a class="btn btn-sm nav-btn mr-2" href="logout">Logout</a>
           </div>
           {% else %}
