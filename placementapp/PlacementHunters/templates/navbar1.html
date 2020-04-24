@@ -19,14 +19,19 @@
           {# else #} -->
           {% if 'username' in session %}
           <div class="navbar-nav ml-auto"></div>
+<<<<<<< HEAD
             <div class="nav-ip mr-2" style="color :black;">Welcome, {{session.username}}</div>
+=======
+            <div class="nav-ip mr-2">Welcome, {{session.username}}</div>
+            <a class="btn btn-sm nav-btn mr-2" href="/JobPage/all">Apply!</a>
+>>>>>>> 7fd32669416dde6027c124d646574a83baa558cb
             <a class="btn btn-sm nav-btn mr-2" href="/CompanyProfile">Profile</a>
             <a class="btn btn-sm nav-btn mr-2" href="logout">Logout</a>
           </div>
           {% else %}
             <form class="form-inline navbar-nav ml-auto" method="POST" action="">
               {{ navform.hidden_tag() }}
-              <a class="btn btn-sm nav-btn mr-2" name="Contact us" href="{# url_for('contact') #}">Contact Us</a>
+              <!-- <a class="btn btn-sm nav-btn mr-2" name="Contact us" href="{# url_for('contact') #}">Contact Us</a> -->
               <!-- <input type='text' name='uname' placeholder="Username" class="form-control form-control-sm nav-ip mr-2"> -->
              
               <!-- <input type='password' name='pwd' placeholder="Password" class="form-control form-control-sm nav-ip mr-3"> -->

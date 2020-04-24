@@ -4,7 +4,7 @@
     margin:3rem;
 }
 body{
-    background: rgba(200,200,200);
+    /* background: rgba(200,200,200); */
     /* background-image: url('../static/images/2164-transparent-color-cubes-abstract-background.jpg'); */
     /* background-color:linear-gradient(166deg, rgba(35,136,190,1) , rgba(42, 110, 85,1)); */
     /* background-color: rgba(50,50,50,0.3);
@@ -15,6 +15,7 @@ body{
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed; */
+    background-color: darkmagenta;
     
 }
 
