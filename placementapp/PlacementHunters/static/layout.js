@@ -19,5 +19,5 @@ $(document).ready(function(){
           $('.main-nav .nav-btn').css({"color":"black"});
       }
   })
-  typeWriter();
+  typeWriter(); 
 })
